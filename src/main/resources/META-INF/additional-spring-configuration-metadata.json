@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "hibernate.show_sql",
+      "type": "java.lang.String",
+      "description": "Description for hibernate.show_sql."
+    },
+    {
+      "name": "format_sql",
+      "type": "java.lang.String",
+      "description": "Description for format_sql."
+    }
+  ] }
