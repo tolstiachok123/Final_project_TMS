@@ -1,5 +1,6 @@
 package com.test.demo.alcomarket.service.impl;
 
+import com.test.demo.alcomarket.dto.AlcoholDrinkDto;
 import com.test.demo.alcomarket.model.AlcoholDrink;
 import com.test.demo.alcomarket.repository.AlcoholDrinkRepository;
 import com.test.demo.alcomarket.service.IAlcoholDrinkService;
@@ -19,13 +20,29 @@ public class AlcoholDrinkServiceImpl implements IAlcoholDrinkService {
     }
 
     @Override
-    public List<AlcoholDrink> findAllAlcoholDrinks() {
+    public List<AlcoholDrink> findAll() {
         return alcoholDrinkRepository.findAll();
     }
 
     @Override
-    public AlcoholDrink getAlcoholDrinkByName(String name) {
+    public AlcoholDrink findByName(String name) {
         return alcoholDrinkRepository.findByName(name);
+    }
+
+    @Override
+    public AlcoholDrink findById(Integer id) {
+        return alcoholDrinkRepository.getOne(id);
+    }
+
+    @Override
+    public AlcoholDrink update(AlcoholDrink alcoholDrink, AlcoholDrinkDto alcoholDrinkDto) {
+        alcoholDrink.setAdv(alcoholDrinkDto.getAdv());
+        alcoholDrink.setCost(alcoholDrinkDto.getCost());
+        alcoholDrink.setName(alcoholDrinkDto.getName());
+        alcoholDrink.setPhotoPath(alcoholDrinkDto.getPhotoPath());
+        alcoholDrink.setQuantity(alcoholDrinkDto.getQuantity());
+        alcoholDrink.setType(alcoholDrinkDto.getType());
+        return alcoholDrink;
     }
 
 

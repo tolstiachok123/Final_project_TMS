@@ -14,13 +14,14 @@ public class AlcoholDrink {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer alcoholDrinkId;
+    private Integer id;
 
     @Column
     private String photoPath;
 
     @Column
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private AlcoholDrinkType type;
 
     @Column
     private int quantity;
@@ -33,4 +34,7 @@ public class AlcoholDrink {
 
     @Column
     private double adv;
+
+    @ManyToOne
+    private Manufacturer manufacturer;
 }

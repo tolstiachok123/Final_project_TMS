@@ -1,5 +1,6 @@
 package com.test.demo.alcomarket.service.impl;
 
+import com.test.demo.alcomarket.dto.UserDto;
 import com.test.demo.alcomarket.model.User;
 import com.test.demo.alcomarket.repository.UserRepository;
 import com.test.demo.alcomarket.service.IUserService;
@@ -24,7 +25,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User getOne(Integer id) {
+        return userRepository.getOne(id);
+    }
+
+    @Override
+    public User disable(User user, UserDto userDto) {
+        user.setActive(userDto.isActive());
+        return user;
     }
 }

@@ -1,6 +1,6 @@
 package com.test.demo.alcomarket.model;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,7 +16,6 @@ public class Role {
     @Column
     @Enumerated(EnumType.STRING)
     private RoleName name;
-
 
     @ManyToMany(mappedBy = "roles")
     private List<User> users;

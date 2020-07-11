@@ -8,5 +8,4 @@ public interface AlcoholDrinkRepository extends JpaRepository<AlcoholDrink, Inte
 
     @Query("from AlcoholDrink where name =:name")
     AlcoholDrink findByName(String name);
-
 }
