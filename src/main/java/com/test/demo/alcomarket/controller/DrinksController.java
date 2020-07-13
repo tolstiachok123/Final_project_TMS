@@ -19,20 +19,32 @@ public class DrinksController {
     }
 
     @GetMapping(value = "/drinks")
-    public List<AlcoholDrink> showAlcoholDrinks() {
+    public List<AlcoholDrink> showAll() {
         return alcoholDrinkService.findAll();
     }
 
     @GetMapping(value = "/drinks/{id}")
-    public AlcoholDrink showAlcoholDrinkById(@PathVariable(name = "id") Integer id) {
+    public AlcoholDrink showById(@PathVariable(name = "id") Integer id) {
         return alcoholDrinkService.findById(id);
     }
 
     @PutMapping(value = "/drinks/{id}")
-    public AlcoholDrink updateAlcoholDrinkById(@PathVariable(name = "id") Integer id,
+    public AlcoholDrink updateById(@PathVariable(name = "id") Integer id,
                                                @RequestBody AlcoholDrinkDto alcoholDrinkDto) {
         AlcoholDrink alcoholDrink = alcoholDrinkService.findById(id);
         return alcoholDrinkService.update(alcoholDrink, alcoholDrinkDto); //В метожде update сделать проверку и копирование ТОЛЬКО измененных полей
+    }
+
+    @PostMapping(value = "/add_drink")
+    public AlcoholDrink addNew(@RequestBody AlcoholDrinkDto alcoholDrinkDto) {
+        AlcoholDrink alcoholDrink = new AlcoholDrink();
+        return alcoholDrinkService.addNew(alcoholDrink, alcoholDrinkDto);
+    }
+
+    @DeleteMapping(value = "/drinks/{id}")
+    public String deleteById(@PathVariable(name = "id") Integer id) {
+        alcoholDrinkService.deleteById(id);
+        return "Alcohol drink deleted successfully!";
     }
 
     @ExceptionHandler(Exception.class)

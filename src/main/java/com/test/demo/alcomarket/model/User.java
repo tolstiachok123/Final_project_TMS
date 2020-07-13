@@ -1,6 +1,9 @@
 package com.test.demo.alcomarket.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -37,4 +39,6 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "roleid", referencedColumnName = "id")})
     private List<Role> roles;
 
+//    @OneToMany(mappedBy = "user")
+//    private List<Order> orders;
 }

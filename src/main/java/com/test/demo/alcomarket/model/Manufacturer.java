@@ -29,10 +29,7 @@ public class Manufacturer {
     @Column
     private String logoPath;
 
-    @OneToMany
-    @JoinTable(name = "manufacturer_alcoholdrink",
-            joinColumns = {@JoinColumn(name = "manufacturerid", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "alcoholdrinkid", referencedColumnName = "id")})
+    @OneToMany(mappedBy = "manufacturer")
     private List<AlcoholDrink> alcoholDrinks;
 
 }

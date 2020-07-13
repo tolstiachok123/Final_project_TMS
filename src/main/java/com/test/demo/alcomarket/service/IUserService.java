@@ -13,4 +13,6 @@ public interface IUserService {
 
     public User disable(User user, UserDto userDto);
 
+    public void deleteById(Integer id);
+
 }

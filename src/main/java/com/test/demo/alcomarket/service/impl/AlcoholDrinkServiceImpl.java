@@ -42,7 +42,25 @@ public class AlcoholDrinkServiceImpl implements IAlcoholDrinkService {
         alcoholDrink.setPhotoPath(alcoholDrinkDto.getPhotoPath());
         alcoholDrink.setQuantity(alcoholDrinkDto.getQuantity());
         alcoholDrink.setType(alcoholDrinkDto.getType());
+        alcoholDrinkRepository.saveAndFlush(alcoholDrink);
         return alcoholDrink;
+    }
+
+    @Override
+    public AlcoholDrink addNew(AlcoholDrink alcoholDrink, AlcoholDrinkDto alcoholDrinkDto) {
+        alcoholDrink.setAdv(alcoholDrinkDto.getAdv());
+        alcoholDrink.setCost(alcoholDrinkDto.getCost());
+        alcoholDrink.setName(alcoholDrinkDto.getName());
+        alcoholDrink.setPhotoPath(alcoholDrinkDto.getPhotoPath());
+        alcoholDrink.setQuantity(alcoholDrinkDto.getQuantity());
+        alcoholDrink.setType(alcoholDrinkDto.getType());
+        alcoholDrinkRepository.saveAndFlush(alcoholDrink);
+        return alcoholDrink;
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        alcoholDrinkRepository.deleteById(id);
     }
 
 

@@ -24,6 +24,10 @@ public class AlcoholDrink {
     private AlcoholDrinkType type;
 
     @Column
+    @Enumerated(EnumType.STRING)
+    private ManufacturerEnum manufacturerEnum;
+
+    @Column
     private int quantity;
 
     @Column
@@ -35,6 +39,13 @@ public class AlcoholDrink {
     @Column
     private double adv;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", insertable = false, updatable = false)
     private Manufacturer manufacturer;
+
+//    @ManyToMany
+//    @JoinTable(name = "order_alcoholdrink",
+//            joinColumns = {@JoinColumn(name = "alcoholdrinkid", referencedColumnName = "id")},
+//            inverseJoinColumns = {@JoinColumn(name = "orderid", referencedColumnName = "id")})
+//    private List<Order> orders;
 }

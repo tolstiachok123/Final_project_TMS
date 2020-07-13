@@ -32,6 +32,13 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User disable(User user, UserDto userDto) {
         user.setActive(userDto.isActive());
+        userRepository.saveAndFlush(user);
         return user;
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        userRepository.deleteById(id);
+    }
+
 }

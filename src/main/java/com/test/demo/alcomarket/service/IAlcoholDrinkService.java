@@ -14,4 +14,8 @@ public interface IAlcoholDrinkService {
     public AlcoholDrink findById(Integer id);
 
     public AlcoholDrink update(AlcoholDrink alcoholDrink, AlcoholDrinkDto alcoholDrinkDto);
+
+    public AlcoholDrink addNew(AlcoholDrink alcoholDrink, AlcoholDrinkDto alcoholDrinkDto);
+
+    public void deleteById(Integer id);
 }

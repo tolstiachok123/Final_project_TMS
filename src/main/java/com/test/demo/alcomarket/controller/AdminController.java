@@ -19,7 +19,7 @@ public class AdminController {
     }
 
     @GetMapping(value = "/users")
-    public List<User> showAllUsers() {
+    public List<User> showAll() {
         return userService.getAllUsers();
     }
 
@@ -29,10 +29,16 @@ public class AdminController {
     }
 
     @PutMapping(value = "/users/{id}")
-    public User disableUserById(@PathVariable(name = "id") Integer id,
+    public User disableById(@PathVariable(name = "id") Integer id,
                                 @RequestBody UserDto userDto) {
         User user = userService.getOne(id);
         return userService.disable(user, userDto);
+    }
+
+    @DeleteMapping(value = "/users/{id}")
+    public String deleteById(@PathVariable(name = "id") Integer id) {
+        userService.deleteById(id);
+        return "User deleted successfully!";
     }
 
     @ExceptionHandler(Exception.class)
