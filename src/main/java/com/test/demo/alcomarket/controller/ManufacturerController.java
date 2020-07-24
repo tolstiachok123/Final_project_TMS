@@ -34,11 +34,6 @@ public class ManufacturerController {
         return manufacturerService.update(manufacturer, manufacturerDto);
     }
 
-    @PostMapping(value = "/add_manufacturer")
-    public Manufacturer addNew(@RequestBody ManufacturerDto manufacturerDto) {
-        return manufacturerService.addNew(manufacturerDto);
-    }
-
     @ExceptionHandler(Exception.class)
     public String handleException(Exception ex) {
         return "OOOOOPs: " + ex.getLocalizedMessage();

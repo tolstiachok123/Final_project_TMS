@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -43,9 +44,9 @@ public class AlcoholDrink {
     @JoinColumn(name = "id", insertable = false, updatable = false)
     private Manufacturer manufacturer;
 
-//    @ManyToMany
-//    @JoinTable(name = "order_alcoholdrink",
-//            joinColumns = {@JoinColumn(name = "alcoholdrinkid", referencedColumnName = "id")},
-//            inverseJoinColumns = {@JoinColumn(name = "orderid", referencedColumnName = "id")})
-//    private List<Order> orders;
+    @ManyToMany
+    @JoinTable(name = "drink_orders",
+            joinColumns = {@JoinColumn(name = "drink_id")},
+            inverseJoinColumns = {@JoinColumn(name = "order_id")})
+    private List<Order> orders;
 }

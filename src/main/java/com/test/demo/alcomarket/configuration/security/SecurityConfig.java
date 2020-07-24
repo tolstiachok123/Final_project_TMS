@@ -37,14 +37,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/index").permitAll()
-                .antMatchers("/alcoholDrink/all").authenticated()
-                .antMatchers("/user/all").hasRole("ADMIN")
+                .antMatchers("/index", "/").permitAll()
+                .antMatchers("/admin").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/alcoholDrink/all")
+                .defaultSuccessUrl("/drinks")
                 .and()
                 .exceptionHandling().accessDeniedHandler(securityHandler)
                 .and()

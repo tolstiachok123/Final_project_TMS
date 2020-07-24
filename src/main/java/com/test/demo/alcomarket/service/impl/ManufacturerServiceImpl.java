@@ -7,9 +7,11 @@ import com.test.demo.alcomarket.service.IManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class ManufacturerServiceImpl implements IManufacturerService {
 
     private IManufacturerRepository manufacturerRepository;
@@ -49,5 +51,10 @@ public class ManufacturerServiceImpl implements IManufacturerService {
         manufacturerRepository.saveAndFlush(manufacturer);
         manufacturer = manufacturerRepository.findByName(manufacturerDto.getName());
         return manufacturer;
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        manufacturerRepository.deleteById(id);
     }
 }

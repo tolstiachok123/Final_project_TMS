@@ -15,4 +15,6 @@ public interface IManufacturerService {
 
     public Manufacturer addNew(ManufacturerDto manufacturerDto);
 
+    public void deleteById(Integer Id);
+
 }

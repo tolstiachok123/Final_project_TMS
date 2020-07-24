@@ -39,6 +39,6 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "roleid", referencedColumnName = "id")})
     private List<Role> roles;
 
-//    @OneToMany(mappedBy = "user")
-//    private List<Order> orders;
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 }

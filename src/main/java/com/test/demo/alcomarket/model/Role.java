@@ -3,6 +3,7 @@ package com.test.demo.alcomarket.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -16,6 +17,6 @@ public class Role {
     @Enumerated(EnumType.STRING)
     private RoleName name;
 
-    /*@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    private List<User> users;*/
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private List<User> users;
 }

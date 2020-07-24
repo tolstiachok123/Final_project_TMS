@@ -35,18 +35,6 @@ public class DrinksController {
         return alcoholDrinkService.update(alcoholDrink, alcoholDrinkDto); //В метожде update сделать проверку и копирование ТОЛЬКО измененных полей
     }
 
-    @PostMapping(value = "/add_drink")
-    public AlcoholDrink addNew(@RequestBody AlcoholDrinkDto alcoholDrinkDto) {
-        AlcoholDrink alcoholDrink = new AlcoholDrink();
-        return alcoholDrinkService.addNew(alcoholDrink, alcoholDrinkDto);
-    }
-
-    @DeleteMapping(value = "/drinks/{id}")
-    public String deleteById(@PathVariable(name = "id") Integer id) {
-        alcoholDrinkService.deleteById(id);
-        return "Alcohol drink deleted successfully!";
-    }
-
     @ExceptionHandler(Exception.class)
     public String handleException(Exception ex) {
         return "OOOOOPs: " + ex.getLocalizedMessage();
