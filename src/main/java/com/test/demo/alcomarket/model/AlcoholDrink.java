@@ -16,37 +16,27 @@ public class AlcoholDrink {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     @Column
     private String photoPath;
-
     @Column
     @Enumerated(EnumType.STRING)
     private AlcoholDrinkType type;
-
-    @Column
-    @Enumerated(EnumType.STRING)
-    private ManufacturerEnum manufacturerEnum;
-
     @Column
     private int quantity;
-
     @Column
     private String name;
-
     @Column
     private double cost;
-
     @Column
     private double adv;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "manufacturer_id", insertable=false, updatable=false)
     private Manufacturer manufacturer;
 
-    @ManyToMany
-    @JoinTable(name = "drink_orders",
-            joinColumns = {@JoinColumn(name = "drink_id")},
-            inverseJoinColumns = {@JoinColumn(name = "order_id")})
+    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "drink_orders",
+//            joinColumns = {@JoinColumn(name = "drink_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "order_id")})
     private List<Order> orders;
 }

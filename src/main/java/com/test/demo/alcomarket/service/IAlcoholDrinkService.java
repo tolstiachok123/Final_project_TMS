@@ -18,4 +18,6 @@ public interface IAlcoholDrinkService {
     public AlcoholDrink addNew(AlcoholDrink alcoholDrink, AlcoholDrinkDto alcoholDrinkDto);
 
     public void deleteById(Integer id);
+
+    public void addToBasket(Integer alcoholId, Integer userId);
 }

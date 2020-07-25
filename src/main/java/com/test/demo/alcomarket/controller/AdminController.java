@@ -56,6 +56,12 @@ public class AdminController {
         return alcoholDrinkService.addNew(alcoholDrink, alcoholDrinkDto);
     }
 
+    @PutMapping(value = "/drinks/{id}")
+    public AlcoholDrink updateById(@PathVariable(name = "id") Integer id, @RequestBody AlcoholDrinkDto alcoholDrinkDto) {
+        AlcoholDrink alcoholDrink = alcoholDrinkService.findById(id);
+        return alcoholDrinkService.update(alcoholDrink, alcoholDrinkDto); //В метожде update сделать проверку и копирование ТОЛЬКО измененных полей
+    }
+
     @DeleteMapping(value = "/drinks/{id}")
     public String deleteAlcoholDrinkById(@PathVariable(name = "id") Integer id) {
         alcoholDrinkService.deleteById(id);

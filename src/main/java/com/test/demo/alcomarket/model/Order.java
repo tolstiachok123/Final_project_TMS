@@ -18,7 +18,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToMany(mappedBy = "orders")
+    @Column
+    private boolean status;
+
+    @ManyToMany(mappedBy = "orders", fetch = FetchType.LAZY)
     private List<AlcoholDrink> alcoholDrinks;
 
     @ManyToOne(fetch = FetchType.LAZY)

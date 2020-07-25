@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
@@ -28,8 +27,8 @@ public class Manufacturer {
 
     @Column
     private String logoPath;
-
-    @OneToMany(mappedBy = "manufacturer")
-    private List<AlcoholDrink> alcoholDrinks;
+//
+//    @OneToMany(mappedBy = "manufacturer", fetch=FetchType.LAZY)
+//    private List<AlcoholDrink> alcoholDrinks;
 
 }

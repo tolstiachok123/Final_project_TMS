@@ -49,4 +49,6 @@ public class CustomPrincipal implements UserDetails {
     public boolean isEnabled() {
         return user.isActive();
     }
+
+    public Integer getId() { return user.getId(); }
 }
