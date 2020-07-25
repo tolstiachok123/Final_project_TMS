@@ -6,7 +6,7 @@ import com.test.demo.alcomarket.model.Order;
 import com.test.demo.alcomarket.model.User;
 import com.test.demo.alcomarket.repository.AlcoholDrinkRepository;
 import com.test.demo.alcomarket.repository.IOrderRepository;
-import com.test.demo.alcomarket.repository.UserRepository;
+import com.test.demo.alcomarket.repository.IUserRepository;
 import com.test.demo.alcomarket.service.IAlcoholDrinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,14 +18,14 @@ import java.util.List;
 @Transactional
 public class AlcoholDrinkServiceImpl implements IAlcoholDrinkService {
 
-    private UserRepository userRepository;
+    private IUserRepository IUserRepository;
     private AlcoholDrinkRepository alcoholDrinkRepository;
     private IOrderRepository orderRepository;
 
     @Autowired
-    AlcoholDrinkServiceImpl(AlcoholDrinkRepository alcoholDrinkRepository, UserRepository userRepository, IOrderRepository orderRepository) {
+    AlcoholDrinkServiceImpl(AlcoholDrinkRepository alcoholDrinkRepository, IUserRepository IUserRepository, IOrderRepository orderRepository) {
         this.alcoholDrinkRepository = alcoholDrinkRepository;
-        this.userRepository = userRepository;
+        this.IUserRepository = IUserRepository;
         this.orderRepository = orderRepository;
     }
 
@@ -75,7 +75,7 @@ public class AlcoholDrinkServiceImpl implements IAlcoholDrinkService {
 
     @Override
     public void addToBasket(Integer alcoholId, Integer userId) {
-        User user = userRepository.findById(userId).get();
+        User user = IUserRepository.findById(userId).get();
         Order order = chooseOrder(user);
         AlcoholDrink alcoholDrink = alcoholDrinkRepository.getOne(alcoholId);
         order.getAlcoholDrinks().add(alcoholDrink);

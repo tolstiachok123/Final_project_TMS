@@ -2,7 +2,7 @@ package com.test.demo.alcomarket.service.impl;
 
 import com.test.demo.alcomarket.dto.UserDto;
 import com.test.demo.alcomarket.model.User;
-import com.test.demo.alcomarket.repository.UserRepository;
+import com.test.demo.alcomarket.repository.IUserRepository;
 import com.test.demo.alcomarket.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,33 +14,33 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements IUserService {
 
-    private UserRepository userRepository;
+    private IUserRepository IUserRepository;
 
     @Autowired
-    UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    UserServiceImpl(IUserRepository IUserRepository) {
+        this.IUserRepository = IUserRepository;
     }
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return IUserRepository.findAll();
     }
 
     @Override
     public User getOne(Integer id) {
-        return userRepository.getOne(id);
+        return IUserRepository.getOne(id);
     }
 
     @Override
     public User disable(User user, UserDto userDto) {
         user.setActive(userDto.isActive());
-        userRepository.saveAndFlush(user);
+        IUserRepository.saveAndFlush(user);
         return user;
     }
 
     @Override
     public void deleteById(Integer id) {
-        userRepository.deleteById(id);
+        IUserRepository.deleteById(id);
     }
 
 }

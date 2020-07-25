@@ -4,7 +4,7 @@ import com.test.demo.alcomarket.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface IUserRepository extends JpaRepository<User, Integer> {
 
     @Query("from User where username = :username")
     User findByUsername(String username);
