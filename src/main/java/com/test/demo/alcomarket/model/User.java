@@ -34,9 +34,6 @@ public class User {
     private boolean active;
 
     @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "user_role",
-//            joinColumns = {@JoinColumn(name = "userid", referencedColumnName = "id")},
-//            inverseJoinColumns = {@JoinColumn(name = "roleid", referencedColumnName = "id")})
     private List<Role> roles;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)

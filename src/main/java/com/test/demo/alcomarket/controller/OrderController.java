@@ -1,28 +1,36 @@
 package com.test.demo.alcomarket.controller;
 
 import com.test.demo.alcomarket.model.Order;
-import com.test.demo.alcomarket.repository.IOrderRepository;
+import com.test.demo.alcomarket.model.User;
+import com.test.demo.alcomarket.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class OrderController {
 
-    private IOrderRepository orderRepository;
+    private IOrderService orderService;
 
     @Autowired
-    OrderController(IOrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
+    OrderController(IOrderService orderService) {
+        this.orderService = orderService;
+    }
+
+    @GetMapping(value = "/order/current")
+    public Order getCurrent() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return orderService.getCurrentOrCreateOrder(user);
     }
 
     @GetMapping(value = "/order/{id}")
     public Order show(@PathVariable(name = "id") Integer id) {
-        return orderRepository.getOne(id);
+        return orderService.getOne(id);
     }
 
     @DeleteMapping(value = "/order/{id}")
     public void delete(@PathVariable(name = "id") Integer id) {
-        orderRepository.deleteById(id);
+        orderService.deleteById(id);
     }
 
     @ExceptionHandler(Exception.class)

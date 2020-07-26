@@ -11,8 +11,9 @@ public interface IUserService {
 
     public User getOne(Integer id);
 
-    public User disable(User user, UserDto userDto);
+    public User disable(User user);
 
     public void deleteById(Integer id);
 
+    public void add(UserDto userDto);
 }

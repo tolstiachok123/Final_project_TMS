@@ -8,4 +8,5 @@ public interface IRoleService {
 
     public List<Role> getAllRoles();
 
+    public Role getDefaultRole();
 }

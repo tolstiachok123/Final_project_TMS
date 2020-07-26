@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserDto {
 
-    public boolean active;
+    private String username;
+    private String email;
+    private String phone;
+    private String password;
 
 }

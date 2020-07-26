@@ -2,7 +2,6 @@ package com.test.demo.alcomarket.controller;
 
 import com.test.demo.alcomarket.dto.AlcoholDrinkDto;
 import com.test.demo.alcomarket.dto.ManufacturerDto;
-import com.test.demo.alcomarket.dto.UserDto;
 import com.test.demo.alcomarket.model.AlcoholDrink;
 import com.test.demo.alcomarket.model.Manufacturer;
 import com.test.demo.alcomarket.model.User;
@@ -39,9 +38,9 @@ public class AdminController {
     }
 
     @PutMapping(value = "/users/{id}")
-    public User disableById(@PathVariable(name = "id") Integer id, @RequestBody UserDto userDto) {
+    public User disableById(@PathVariable(name = "id") Integer id) {
         User user = userService.getOne(id);
-        return userService.disable(user, userDto);
+        return userService.disable(user);
     }
 
     @DeleteMapping(value = "/users/{id}")

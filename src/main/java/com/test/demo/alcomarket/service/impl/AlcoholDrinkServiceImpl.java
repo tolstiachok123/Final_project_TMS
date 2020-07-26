@@ -5,9 +5,9 @@ import com.test.demo.alcomarket.model.AlcoholDrink;
 import com.test.demo.alcomarket.model.Order;
 import com.test.demo.alcomarket.model.User;
 import com.test.demo.alcomarket.repository.AlcoholDrinkRepository;
-import com.test.demo.alcomarket.repository.IOrderRepository;
 import com.test.demo.alcomarket.repository.IUserRepository;
 import com.test.demo.alcomarket.service.IAlcoholDrinkService;
+import com.test.demo.alcomarket.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +18,15 @@ import java.util.List;
 @Transactional
 public class AlcoholDrinkServiceImpl implements IAlcoholDrinkService {
 
-    private IUserRepository IUserRepository;
+    private IUserRepository iUserRepository;
     private AlcoholDrinkRepository alcoholDrinkRepository;
-    private IOrderRepository orderRepository;
+    private IOrderService orderService;
 
     @Autowired
-    AlcoholDrinkServiceImpl(AlcoholDrinkRepository alcoholDrinkRepository, IUserRepository IUserRepository, IOrderRepository orderRepository) {
+    AlcoholDrinkServiceImpl(AlcoholDrinkRepository alcoholDrinkRepository, IUserRepository iUserRepository, IOrderService orderService) {
         this.alcoholDrinkRepository = alcoholDrinkRepository;
-        this.IUserRepository = IUserRepository;
-        this.orderRepository = orderRepository;
+        this.iUserRepository = iUserRepository;
+        this.orderService = orderService;
     }
 
     @Override
@@ -75,18 +75,11 @@ public class AlcoholDrinkServiceImpl implements IAlcoholDrinkService {
 
     @Override
     public void addToBasket(Integer alcoholId, Integer userId) {
-        User user = IUserRepository.findById(userId).get();
-        Order order = chooseOrder(user);
+        User user = iUserRepository.findById(userId).get();
+        Order order = orderService.getCurrentOrCreateOrder(user);
         AlcoholDrink alcoholDrink = alcoholDrinkRepository.getOne(alcoholId);
         order.getAlcoholDrinks().add(alcoholDrink);
-        orderRepository.saveAndFlush(order);
-    }
-
-    public Order chooseOrder(User user) {
-        for (Order order : user.getOrders()) {
-            if (order.isStatus()) return orderRepository.findById(order.getId()).get();
-        }
-        return new Order();
+        orderService.update(order);
     }
 
 }
