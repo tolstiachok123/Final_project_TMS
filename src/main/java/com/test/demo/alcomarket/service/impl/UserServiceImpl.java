@@ -1,15 +1,13 @@
 package com.test.demo.alcomarket.service.impl;
 
 import com.test.demo.alcomarket.dto.UserDto;
-import com.test.demo.alcomarket.model.Role;
+import com.test.demo.alcomarket.mapper.UserMapper;
 import com.test.demo.alcomarket.model.User;
 import com.test.demo.alcomarket.repository.IUserRepository;
 import com.test.demo.alcomarket.security.CustomPrincipal;
-import com.test.demo.alcomarket.service.IRoleService;
 import com.test.demo.alcomarket.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,29 +19,26 @@ import java.util.List;
 public class UserServiceImpl implements IUserService {
 
     private IUserRepository iUserRepository;
-    private IRoleService roleService;
+    private UserMapper userMapper;
 
     @Autowired
-    UserServiceImpl(IUserRepository IUserRepository, IRoleService roleService) {
+    UserServiceImpl(IUserRepository IUserRepository, UserMapper userMapper) {
         this.iUserRepository = IUserRepository;
-        this.roleService = roleService;
+        this.userMapper = userMapper;
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return iUserRepository.findAll();
+    public List<UserDto> getAllUsers() {
+        List<UserDto> userDtos = new ArrayList<>();
+        for (User user : iUserRepository.findAll()) {
+            userDtos.add(userMapper.objectToDto(user));
+        }
+        return userDtos;
     }
 
     @Override
-    public User getOne(Integer id) {
-        return iUserRepository.getOne(id);
-    }
-
-    @Override
-    public User disable(User user) {
-        user.setActive(false);
-        iUserRepository.saveAndFlush(user);
-        return user;
+    public UserDto getOne(Integer id) {
+        return userMapper.objectToDto(iUserRepository.getOne(id));
     }
 
     @Override
@@ -53,25 +48,12 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void add(UserDto userDto) {
-        User user = new User();
-        user.setActive(true);
-        user.setEmail(userDto.getEmail());
-        user.setPassword(new BCryptPasswordEncoder().encode(userDto.getPassword()));
-        user.setUsername(userDto.getUsername());
-        user.setRoles(getDefaultRoleList());
-        user.setPhone(userDto.getPhone());
-        iUserRepository.saveAndFlush(user);
+        iUserRepository.saveAndFlush(userMapper.dtoToObject(userDto));
     }
 
-    public User getCurrent() {
+    public UserDto getCurrent() {
         Integer userId = ((CustomPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        return iUserRepository.getOne(userId);
-    }
-
-    private List<Role> getDefaultRoleList() {
-        List<Role> defaultRoleList = new ArrayList<Role>();
-        defaultRoleList.add(roleService.getDefaultRole());
-        return defaultRoleList;
+        return userMapper.objectToDto(iUserRepository.getOne(userId));
     }
 
 }

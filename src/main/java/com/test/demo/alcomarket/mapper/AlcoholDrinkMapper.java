@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AlcoholDrinkMapper {
 
-    public AlcoholDrink DtoToObject(AlcoholDrinkDto alcoholDrinkDto, AlcoholDrink alcoholDrink) {
+    public AlcoholDrink dtoToObject(AlcoholDrinkDto alcoholDrinkDto, AlcoholDrink alcoholDrink) {
         alcoholDrink.setAdv(alcoholDrinkDto.getAdv());
         alcoholDrink.setCost(alcoholDrinkDto.getCost());
         alcoholDrink.setName(alcoholDrinkDto.getName());
@@ -17,7 +17,7 @@ public class AlcoholDrinkMapper {
         return alcoholDrink;
     }
 
-    public AlcoholDrinkDto ObjectToDto(AlcoholDrink alcoholDrink) {
+    public AlcoholDrinkDto objectToDto(AlcoholDrink alcoholDrink) {
         AlcoholDrinkDto alcoholDrinkDto = new AlcoholDrinkDto();
         alcoholDrinkDto.setAdv(alcoholDrink.getAdv());
         alcoholDrinkDto.setCost(alcoholDrink.getCost());

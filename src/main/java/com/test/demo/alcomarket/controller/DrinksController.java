@@ -1,6 +1,6 @@
 package com.test.demo.alcomarket.controller;
 
-import com.test.demo.alcomarket.model.AlcoholDrink;
+import com.test.demo.alcomarket.dto.AlcoholDrinkDto;
 import com.test.demo.alcomarket.service.IAlcoholDrinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ public class DrinksController {
     }
 
     @GetMapping(value = "/drinks")
-    public List<AlcoholDrink> showAll() {
+    public List<AlcoholDrinkDto> showAll() {
         return alcoholDrinkService.findAll();
     }
 
@@ -28,7 +28,7 @@ public class DrinksController {
     }
 
     @GetMapping(value = "/drinks/{id}")
-    public AlcoholDrink showById(@PathVariable(name = "id") Integer id) {
+    public AlcoholDrinkDto showById(@PathVariable(name = "id") Integer id) {
         return alcoholDrinkService.findById(id);
     }
 

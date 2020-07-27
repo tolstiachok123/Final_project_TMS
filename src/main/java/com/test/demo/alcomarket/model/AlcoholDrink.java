@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -32,7 +33,7 @@ public class AlcoholDrink {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manufacturer_id", insertable=false, updatable=false)
     private Manufacturer manufacturer;
-//
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    private List<Order> orders;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Order> orders;
 }

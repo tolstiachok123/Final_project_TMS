@@ -1,19 +1,18 @@
 package com.test.demo.alcomarket.service;
 
 import com.test.demo.alcomarket.dto.ManufacturerDto;
-import com.test.demo.alcomarket.model.Manufacturer;
 
 import java.util.List;
 
 public interface IManufacturerService {
 
-    public List<Manufacturer> findAll();
+    public List<ManufacturerDto> getAll();
 
-    public Manufacturer findById(Integer id);
+    public ManufacturerDto getById(Integer id);
 
-    public Manufacturer update(Manufacturer manufacturer, ManufacturerDto manufacturerDto);
+    public void update(Integer id, ManufacturerDto manufacturerDto);
 
-    public Manufacturer addNew(ManufacturerDto manufacturerDto);
+    public void addNew(ManufacturerDto manufacturerDto);
 
     public void deleteById(Integer Id);
 

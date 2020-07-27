@@ -2,8 +2,7 @@ package com.test.demo.alcomarket.controller;
 
 import com.test.demo.alcomarket.dto.AlcoholDrinkDto;
 import com.test.demo.alcomarket.dto.ManufacturerDto;
-import com.test.demo.alcomarket.model.Manufacturer;
-import com.test.demo.alcomarket.model.User;
+import com.test.demo.alcomarket.dto.UserDto;
 import com.test.demo.alcomarket.service.IAlcoholDrinkService;
 import com.test.demo.alcomarket.service.IManufacturerService;
 import com.test.demo.alcomarket.service.IUserService;
@@ -27,19 +26,13 @@ public class AdminController {
     }
 
     @GetMapping(value = "/users")
-    public List<User> showAll() {
+    public List<UserDto> showAll() {
         return userService.getAllUsers();
     }
 
     @GetMapping(value = "/users/{id}")
-    public User showById(@PathVariable(name = "id") Integer id) {
+    public UserDto showById(@PathVariable(name = "id") Integer id) {
         return userService.getOne(id);
-    }
-
-    @PutMapping(value = "/users/{id}")
-    public User disableById(@PathVariable(name = "id") Integer id) {
-        User user = userService.getOne(id);
-        return userService.disable(user);
     }
 
     @DeleteMapping(value = "/users/{id}")
@@ -65,8 +58,8 @@ public class AdminController {
     }
 
     @PostMapping(value = "/manufacturer")
-    public Manufacturer addNew(@RequestBody ManufacturerDto manufacturerDto) {
-        return manufacturerService.addNew(manufacturerDto);
+    public void addNew(@RequestBody ManufacturerDto manufacturerDto) {
+        manufacturerService.addNew(manufacturerDto);
     }
 
     @DeleteMapping(value = "/manufacturers/{id}")

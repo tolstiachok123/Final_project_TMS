@@ -1,6 +1,7 @@
 package com.test.demo.alcomarket.service.impl;
 
 import com.test.demo.alcomarket.dto.ManufacturerDto;
+import com.test.demo.alcomarket.mapper.ManufacturerMapper;
 import com.test.demo.alcomarket.model.Manufacturer;
 import com.test.demo.alcomarket.repository.IManufacturerRepository;
 import com.test.demo.alcomarket.service.IManufacturerService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,42 +17,39 @@ import java.util.List;
 public class ManufacturerServiceImpl implements IManufacturerService {
 
     private IManufacturerRepository manufacturerRepository;
+    private ManufacturerMapper manufacturerMapper;
 
     @Autowired
-    ManufacturerServiceImpl(IManufacturerRepository manufacturerRepository) {
+    ManufacturerServiceImpl(IManufacturerRepository manufacturerRepository, ManufacturerMapper manufacturerMapper) {
         this.manufacturerRepository = manufacturerRepository;
+        this.manufacturerMapper = manufacturerMapper;
     }
 
     @Override
-    public List<Manufacturer> findAll() {
-        return manufacturerRepository.findAll();
+    public List<ManufacturerDto> getAll() {
+        List<ManufacturerDto> manufacturerDtos = new ArrayList<ManufacturerDto>();
+        List<Manufacturer> manufacturers = manufacturerRepository.findAll();
+        for (Manufacturer manufacturer : manufacturers) {
+            manufacturerDtos.add(manufacturerMapper.objectToDto(manufacturer));
+        }
+        return manufacturerDtos;
     }
 
     @Override
-    public Manufacturer findById(Integer id) {
-        return manufacturerRepository.getOne(id);
+    public ManufacturerDto getById(Integer id) {
+        return manufacturerMapper.objectToDto(manufacturerRepository.getOne(id));
     }
 
     @Override
-    public Manufacturer update(Manufacturer manufacturer, ManufacturerDto manufacturerDto) {
-        manufacturer.setDescription(manufacturerDto.getDescription());
-        manufacturer.setLink(manufacturerDto.getLink());
-        manufacturer.setLogoPath(manufacturerDto.getLogoPath());
-        manufacturer.setName(manufacturerDto.getName());
+    public void update(Integer id, ManufacturerDto manufacturerDto) {
+        Manufacturer manufacturer = manufacturerRepository.getOne(id);
+        manufacturerRepository.saveAndFlush(manufacturerMapper.dtoToObject(manufacturerDto, manufacturer));
+    }
+
+    @Override
+    public void addNew(ManufacturerDto manufacturerDto) {
+        Manufacturer manufacturer =manufacturerMapper.dtoToObject(manufacturerDto, new Manufacturer());
         manufacturerRepository.saveAndFlush(manufacturer);
-        return manufacturer;
-    }
-
-    @Override
-    public Manufacturer addNew(ManufacturerDto manufacturerDto) {
-        Manufacturer manufacturer = new Manufacturer();
-        manufacturer.setDescription(manufacturerDto.getDescription());
-        manufacturer.setLink(manufacturerDto.getLink());
-        manufacturer.setLogoPath(manufacturerDto.getLogoPath());
-        manufacturer.setName(manufacturerDto.getName());
-        manufacturerRepository.saveAndFlush(manufacturer);
-        manufacturer = manufacturerRepository.findByName(manufacturerDto.getName());
-        return manufacturer;
     }
 
     @Override
