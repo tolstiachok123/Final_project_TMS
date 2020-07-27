@@ -7,17 +7,15 @@ import java.util.List;
 
 public interface IAlcoholDrinkService {
 
-    public List<AlcoholDrink> findAll();
-
-    public AlcoholDrink findByName(String name);
+    public List<AlcoholDrinkDto> findAll();
 
     public AlcoholDrink findById(Integer id);
 
-    public AlcoholDrink update(AlcoholDrink alcoholDrink, AlcoholDrinkDto alcoholDrinkDto);
+    public void update(Integer drinkId, AlcoholDrinkDto alcoholDrinkDto);
 
-    public AlcoholDrink addNew(AlcoholDrink alcoholDrink, AlcoholDrinkDto alcoholDrinkDto);
+    public void addNew(AlcoholDrinkDto alcoholDrinkDto);
 
     public void deleteById(Integer id);
 
-    public void addToBasket(Integer alcoholId, Integer userId);
+    public void addToBasket(Integer alcoholId);
 }

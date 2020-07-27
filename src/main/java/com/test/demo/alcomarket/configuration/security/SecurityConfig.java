@@ -1,5 +1,6 @@
 package com.test.demo.alcomarket.configuration.security;
 
+import com.test.demo.alcomarket.security.CorsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 
 @Configuration
 @ComponentScan
@@ -29,6 +31,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    CorsFilter myCorsFilter() {
+        return new CorsFilter();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder authentication) throws Exception {
         authentication.authenticationProvider(securityProvider);
@@ -37,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .addFilterBefore(myCorsFilter(), WebAsyncManagerIntegrationFilter.class)
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/drinks").permitAll()
@@ -49,8 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .defaultSuccessUrl("/drinks")
                 .and()
-                .exceptionHandling().accessDeniedHandler(securityHandler)
-                .and()
-                .cors().disable();
+                .exceptionHandling().accessDeniedHandler(securityHandler);
     }
 }

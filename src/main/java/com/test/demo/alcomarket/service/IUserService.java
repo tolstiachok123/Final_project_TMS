@@ -16,4 +16,6 @@ public interface IUserService {
     public void deleteById(Integer id);
 
     public void add(UserDto userDto);
+
+    public User getCurrent();
 }

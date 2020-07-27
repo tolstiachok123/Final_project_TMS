@@ -9,12 +9,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
-
-    private String username;
-    private String email;
-    private String phone;
-    private String password;
-    private List<String> roles;
-
+public class OrderDto {
+     private List<AlcoholDrinkDto> drinks;
 }

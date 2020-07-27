@@ -4,9 +4,11 @@ import com.test.demo.alcomarket.dto.UserDto;
 import com.test.demo.alcomarket.model.Role;
 import com.test.demo.alcomarket.model.User;
 import com.test.demo.alcomarket.repository.IUserRepository;
+import com.test.demo.alcomarket.security.CustomPrincipal;
 import com.test.demo.alcomarket.service.IRoleService;
 import com.test.demo.alcomarket.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -57,7 +59,13 @@ public class UserServiceImpl implements IUserService {
         user.setPassword(new BCryptPasswordEncoder().encode(userDto.getPassword()));
         user.setUsername(userDto.getUsername());
         user.setRoles(getDefaultRoleList());
+        user.setPhone(userDto.getPhone());
         iUserRepository.saveAndFlush(user);
+    }
+
+    public User getCurrent() {
+        Integer userId = ((CustomPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        return iUserRepository.getOne(userId);
     }
 
     private List<Role> getDefaultRoleList() {

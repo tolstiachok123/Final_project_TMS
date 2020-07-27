@@ -2,7 +2,6 @@ package com.test.demo.alcomarket.controller;
 
 import com.test.demo.alcomarket.dto.AlcoholDrinkDto;
 import com.test.demo.alcomarket.dto.ManufacturerDto;
-import com.test.demo.alcomarket.model.AlcoholDrink;
 import com.test.demo.alcomarket.model.Manufacturer;
 import com.test.demo.alcomarket.model.User;
 import com.test.demo.alcomarket.service.IAlcoholDrinkService;
@@ -50,15 +49,13 @@ public class AdminController {
     }
 
     @PostMapping(value = "/drinks")
-    public AlcoholDrink addNew(@RequestBody AlcoholDrinkDto alcoholDrinkDto) {
-        AlcoholDrink alcoholDrink = new AlcoholDrink();
-        return alcoholDrinkService.addNew(alcoholDrink, alcoholDrinkDto);
+    public void addNew(@RequestBody AlcoholDrinkDto alcoholDrinkDto) {
+        alcoholDrinkService.addNew(alcoholDrinkDto);
     }
 
     @PutMapping(value = "/drinks/{id}")
-    public AlcoholDrink updateById(@PathVariable(name = "id") Integer id, @RequestBody AlcoholDrinkDto alcoholDrinkDto) {
-        AlcoholDrink alcoholDrink = alcoholDrinkService.findById(id);
-        return alcoholDrinkService.update(alcoholDrink, alcoholDrinkDto); //В метожде update сделать проверку и копирование ТОЛЬКО измененных полей
+    public void updateById(@PathVariable(name = "id") Integer id, @RequestBody AlcoholDrinkDto alcoholDrinkDto) {
+        alcoholDrinkService.update(id, alcoholDrinkDto); //В метожде update сделать проверку и копирование ТОЛЬКО измененных полей
     }
 
     @DeleteMapping(value = "/drinks/{id}")

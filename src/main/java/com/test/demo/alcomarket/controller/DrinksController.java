@@ -1,10 +1,8 @@
 package com.test.demo.alcomarket.controller;
 
 import com.test.demo.alcomarket.model.AlcoholDrink;
-import com.test.demo.alcomarket.security.CustomPrincipal;
 import com.test.demo.alcomarket.service.IAlcoholDrinkService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +24,7 @@ public class DrinksController {
 
     @PostMapping(value = "/drinks/{id}/basket")
     public void addToBasket(@PathVariable(name = "id") Integer id) {
-        alcoholDrinkService.addToBasket(id,
-                ((CustomPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        alcoholDrinkService.addToBasket(id);
     }
 
     @GetMapping(value = "/drinks/{id}")
