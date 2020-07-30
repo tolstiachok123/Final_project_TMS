@@ -3,7 +3,10 @@ package com.test.demo.alcomarket.controller;
 import com.test.demo.alcomarket.dto.OrderDto;
 import com.test.demo.alcomarket.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class OrderController {
@@ -23,11 +26,6 @@ public class OrderController {
     @GetMapping(value = "/order/{id}")
     public OrderDto show(@PathVariable(name = "id") Integer id) {
         return orderService.getOne(id);
-    }
-
-    @DeleteMapping(value = "/order/{id}")
-    public void delete(@PathVariable(name = "id") Integer id) {
-        orderService.deleteById(id);
     }
 
     @ExceptionHandler(Exception.class)

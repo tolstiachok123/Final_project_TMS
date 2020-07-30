@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TestController {
+public class UserController {
 
     private IUserService userService;
 
     @Autowired
-    TestController(IUserService userService) {
+    UserController(IUserService userService) {
         this.userService = userService;
     }
 

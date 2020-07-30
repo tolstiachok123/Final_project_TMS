@@ -5,6 +5,7 @@ import com.test.demo.alcomarket.dto.ManufacturerDto;
 import com.test.demo.alcomarket.dto.UserDto;
 import com.test.demo.alcomarket.service.IAlcoholDrinkService;
 import com.test.demo.alcomarket.service.IManufacturerService;
+import com.test.demo.alcomarket.service.IOrderService;
 import com.test.demo.alcomarket.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +18,14 @@ public class AdminController {
     private IUserService userService;
     private IAlcoholDrinkService alcoholDrinkService;
     private IManufacturerService manufacturerService;
+    private IOrderService orderService;
 
     @Autowired
-    AdminController(IUserService userService, IAlcoholDrinkService alcoholDrinkService, IManufacturerService manufacturerService) {
+    AdminController(IUserService userService, IAlcoholDrinkService alcoholDrinkService, IManufacturerService manufacturerService, IOrderService orderService) {
         this.userService = userService;
         this.alcoholDrinkService = alcoholDrinkService;
         this.manufacturerService = manufacturerService;
+        this.orderService = orderService;
     }
 
     @GetMapping(value = "/users")
@@ -66,6 +69,11 @@ public class AdminController {
     public String deleteManufacturerById(@PathVariable(name = "id") Integer id) {
         manufacturerService.deleteById(id);
         return "Manufacturer deleted successfully!";
+    }
+
+    @DeleteMapping(value = "/order/{id}")
+    public void delete(@PathVariable(name = "id") Integer id) {
+        orderService.deleteById(id);
     }
 
     @ExceptionHandler(Exception.class)
