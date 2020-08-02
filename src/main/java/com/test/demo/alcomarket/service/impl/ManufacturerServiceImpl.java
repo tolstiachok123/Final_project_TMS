@@ -5,6 +5,7 @@ import com.test.demo.alcomarket.mapper.ManufacturerMapper;
 import com.test.demo.alcomarket.model.Manufacturer;
 import com.test.demo.alcomarket.repository.IManufacturerRepository;
 import com.test.demo.alcomarket.service.IManufacturerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @Transactional
 public class ManufacturerServiceImpl implements IManufacturerService {

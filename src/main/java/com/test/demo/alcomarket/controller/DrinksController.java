@@ -3,6 +3,7 @@ package com.test.demo.alcomarket.controller;
 import com.test.demo.alcomarket.dto.AlcoholDrinkDto;
 import com.test.demo.alcomarket.mapper.AlcoholDrinkMapper;
 import com.test.demo.alcomarket.service.IAlcoholDrinkService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 public class DrinksController {
 

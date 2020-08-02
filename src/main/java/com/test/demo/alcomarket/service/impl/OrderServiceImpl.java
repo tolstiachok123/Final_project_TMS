@@ -7,11 +7,13 @@ import com.test.demo.alcomarket.model.User;
 import com.test.demo.alcomarket.repository.IOrderRepository;
 import com.test.demo.alcomarket.service.IOrderService;
 import com.test.demo.alcomarket.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+@Slf4j
 @Service
 public class OrderServiceImpl implements IOrderService {
 
