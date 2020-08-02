@@ -1,6 +1,7 @@
 package com.test.demo.alcomarket.controller;
 
 import com.test.demo.alcomarket.dto.UserDto;
+import com.test.demo.alcomarket.mapper.UserMapper;
 import com.test.demo.alcomarket.security.CustomPrincipal;
 import com.test.demo.alcomarket.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
-    private IUserService userService;
+    private final IUserService userService;
+    private final UserMapper userMapper;
 
     @Autowired
-    UserController(IUserService userService) {
+    UserController(IUserService userService, UserMapper userMapper) {
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @GetMapping(value = "/user")
@@ -27,6 +30,6 @@ public class UserController {
 
     @PostMapping(value = "/registration")
     public void registerUser(@RequestBody UserDto userDto) {
-        userService.add(userDto);
+        userService.add(userMapper.dtoToObject(userDto));
     }
 }

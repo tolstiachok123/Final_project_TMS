@@ -1,6 +1,7 @@
 package com.test.demo.alcomarket.service;
 
 import com.test.demo.alcomarket.dto.ManufacturerDto;
+import com.test.demo.alcomarket.model.Manufacturer;
 
 import java.util.List;
 
@@ -8,11 +9,11 @@ public interface IManufacturerService {
 
     public List<ManufacturerDto> getAll();
 
-    public ManufacturerDto getById(Integer id);
+    public Manufacturer getById(Integer id);
 
-    public void update(Integer id, ManufacturerDto manufacturerDto);
+    public void update(Integer id, Manufacturer manufacturer);
 
-    public void addNew(ManufacturerDto manufacturerDto);
+    public void addNew(Manufacturer manufacturer);
 
     public void deleteById(Integer Id);
 

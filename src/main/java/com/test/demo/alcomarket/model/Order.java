@@ -2,6 +2,7 @@ package com.test.demo.alcomarket.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "orders")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Order {
 
     @Id
@@ -21,10 +23,20 @@ public class Order {
     @Column
     private boolean status;
 
-    @ManyToMany(mappedBy = "orders", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "orders", fetch = FetchType.EAGER)
     private List<AlcoholDrink> alcoholDrinks;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", status=" + status +
+                ", alcoholDrinks=" + alcoholDrinks +
+                ", user=" + user +
+                '}';
+    }
 }

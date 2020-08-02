@@ -1,6 +1,7 @@
 package com.test.demo.alcomarket.controller;
 
 import com.test.demo.alcomarket.dto.ManufacturerDto;
+import com.test.demo.alcomarket.mapper.ManufacturerMapper;
 import com.test.demo.alcomarket.service.IManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,11 +11,13 @@ import java.util.List;
 @RestController
 public class ManufacturerController {
 
-    private IManufacturerService manufacturerService;
+    private final IManufacturerService manufacturerService;
+    private final ManufacturerMapper manufacturerMapper;
 
     @Autowired
-    ManufacturerController(IManufacturerService manufacturerService) {
+    ManufacturerController(IManufacturerService manufacturerService, ManufacturerMapper manufacturerMapper) {
         this.manufacturerService = manufacturerService;
+        this.manufacturerMapper = manufacturerMapper;
     }
 
     @GetMapping(value = "/manufacturers")
@@ -24,16 +27,12 @@ public class ManufacturerController {
 
     @GetMapping(value = "/manufacturers/{id}")
     public ManufacturerDto showById(@PathVariable(name = "id") Integer id) {
-        return manufacturerService.getById(id);
+        return manufacturerMapper.objectToDto(manufacturerService.getById(id));
     }
 
     @PutMapping(value = "/manufacturers/{id}")
     public void updateById(@PathVariable(name = "id") Integer id, @RequestBody ManufacturerDto manufacturerDto) {
-        manufacturerService.update(id, manufacturerDto);
+        manufacturerService.update(id, manufacturerMapper.dtoToObject(manufacturerDto));
     }
 
-    @ExceptionHandler(Exception.class)
-    public String handleException(Exception ex) {
-        return "OOOOOPs: " + ex.getLocalizedMessage();
-    }
 }

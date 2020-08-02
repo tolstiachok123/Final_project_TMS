@@ -1,6 +1,7 @@
 package com.test.demo.alcomarket.service;
 
 import com.test.demo.alcomarket.dto.UserDto;
+import com.test.demo.alcomarket.model.User;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface IUserService {
 
     public void deleteById(Integer id);
 
-    public void add(UserDto userDto);
+    public void add(User user);
 
-    public UserDto getCurrent();
+    public User getCurrent();
 }

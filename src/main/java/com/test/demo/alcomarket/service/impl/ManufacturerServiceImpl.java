@@ -36,20 +36,20 @@ public class ManufacturerServiceImpl implements IManufacturerService {
     }
 
     @Override
-    public ManufacturerDto getById(Integer id) {
-        return manufacturerMapper.objectToDto(manufacturerRepository.getOne(id));
+    public Manufacturer getById(Integer id) {
+        return manufacturerRepository.getOne(id);
     }
 
     @Override
-    public void update(Integer id, ManufacturerDto manufacturerDto) {
-        Manufacturer manufacturer = manufacturerRepository.getOne(id);
-        manufacturerRepository.saveAndFlush(manufacturerMapper.dtoToObject(manufacturerDto, manufacturer));
+    public void update(Integer id, Manufacturer manufacturer) {
+        Manufacturer oldManufacturer = manufacturerRepository.getOne(id);
+        manufacturer.setId(oldManufacturer.getId());
+        manufacturerRepository.save(manufacturer);
     }
 
     @Override
-    public void addNew(ManufacturerDto manufacturerDto) {
-        Manufacturer manufacturer =manufacturerMapper.dtoToObject(manufacturerDto, new Manufacturer());
-        manufacturerRepository.saveAndFlush(manufacturer);
+    public void addNew(Manufacturer manufacturer) {
+        manufacturerRepository.save(manufacturer);
     }
 
     @Override

@@ -22,14 +22,12 @@ public class UserMapper {
     }
 
     public UserDto objectToDto(User user) {
-
         UserDto userDto = new UserDto();
-
         List<String> rolesStringFormat = new ArrayList<>();
         for (Role role : user.getRoles()) {
             rolesStringFormat.add(role.getName().toString());
         }
-
+        userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
         userDto.setRoles(rolesStringFormat);
         userDto.setEmail(user.getEmail());
@@ -40,6 +38,7 @@ public class UserMapper {
 
     public User dtoToObject(UserDto userDto) {
         User user = new User();
+        user.setId(userDto.getId());
         user.setActive(true);
         user.setEmail(userDto.getEmail());
         user.setPassword(new BCryptPasswordEncoder().encode(userDto.getPassword()));

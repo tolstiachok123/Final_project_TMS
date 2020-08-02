@@ -1,6 +1,5 @@
 package com.test.demo.alcomarket.service.impl;
 
-import com.test.demo.alcomarket.dto.OrderDto;
 import com.test.demo.alcomarket.mapper.OrderMapper;
 import com.test.demo.alcomarket.mapper.UserMapper;
 import com.test.demo.alcomarket.model.Order;
@@ -16,9 +15,9 @@ import java.util.ArrayList;
 @Service
 public class OrderServiceImpl implements IOrderService {
 
-    private IOrderRepository orderRepository;
+    private final IOrderRepository orderRepository;
     private OrderMapper orderMapper;
-    private IUserService userService;
+    private final IUserService userService;
     private UserMapper userMapper;
 
     @Autowired
@@ -30,8 +29,8 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public OrderDto getOne(Integer id) {
-        return orderMapper.objectToDto(orderRepository.getOne(id));
+    public Order getOne(Integer id) {
+        return orderRepository.getOne(id);
     }
 
     @Override
@@ -40,21 +39,32 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public OrderDto getCurrentOrCreateOrder() {
-        User user = userMapper.dtoToObject(userService.getCurrent());
-        try {
-            return orderMapper.objectToDto(orderRepository.getCurrentOrder(user));
-        } catch (Exception e) {
+    public Order getCurrentOrCreateOrder() {
+        User user = userService.getCurrent();
+        Order activeOrder = orderRepository.getCurrentOrder(user);
+        if (activeOrder != null) {
+            return activeOrder;
+        } else {
             Order order = new Order();
             order.setStatus(true);
             order.setAlcoholDrinks(new ArrayList<>());
-            orderRepository.saveAndFlush(order);
-            return orderMapper.objectToDto(order);
+            order.setUser(user);
+            orderRepository.save(order);
+            return order;
         }
     }
 
     @Override
     public void update(Order order) {
-        orderRepository.saveAndFlush(order);
+        orderRepository.save(order);
     }
+
+    @Override
+    public void payCurrentOrder() {
+        Order currentOrder = orderRepository.getCurrentOrder(userService.getCurrent());
+        currentOrder.setStatus(false);
+        orderRepository.save(currentOrder);
+    }
+
+
 }

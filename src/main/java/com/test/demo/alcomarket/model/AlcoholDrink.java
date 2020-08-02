@@ -2,6 +2,7 @@ package com.test.demo.alcomarket.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class AlcoholDrink {
 
     @Id
@@ -34,6 +36,20 @@ public class AlcoholDrink {
     @JoinColumn(name = "manufacturer_id", insertable=false, updatable=false)
     private Manufacturer manufacturer;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Order> orders;
+
+    @Override
+    public String toString() {
+        return "AlcoholDrink{" +
+                "id=" + id +
+                ", photoPath='" + photoPath + '\'' +
+                ", type=" + type +
+                ", quantity=" + quantity +
+                ", name='" + name + '\'' +
+                ", cost=" + cost +
+                ", adv=" + adv +
+                ", manufacturer=" + manufacturer +
+                '}';
+    }
 }

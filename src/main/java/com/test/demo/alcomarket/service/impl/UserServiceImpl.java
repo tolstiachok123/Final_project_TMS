@@ -47,13 +47,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void add(UserDto userDto) {
-        iUserRepository.saveAndFlush(userMapper.dtoToObject(userDto));
+    public void add(User user) {
+        iUserRepository.save(user);
     }
 
-    public UserDto getCurrent() {
+    public User getCurrent() {
         Integer userId = ((CustomPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        return userMapper.objectToDto(iUserRepository.getOne(userId));
+        return iUserRepository.getOne(userId);
     }
 
 }

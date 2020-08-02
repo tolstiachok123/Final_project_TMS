@@ -16,7 +16,8 @@ public class ManufacturerMapper {
         return manufacturerDto;
     }
 
-    public Manufacturer dtoToObject(ManufacturerDto manufacturerDto, Manufacturer manufacturer) {
+    public Manufacturer dtoToObject(ManufacturerDto manufacturerDto) {
+        Manufacturer manufacturer = new Manufacturer();
         manufacturer.setDescription(manufacturerDto.getDescription());
         manufacturer.setLink(manufacturerDto.getLink());
         manufacturer.setLogoPath(manufacturerDto.getLogoPath());

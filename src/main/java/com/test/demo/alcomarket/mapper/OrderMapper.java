@@ -28,14 +28,14 @@ public class OrderMapper {
         return orderDto;
     }
 
-    public Order dtoToObject(OrderDto orderDto) {
-        Order order = new Order();
-        List<AlcoholDrink> alcoholDrinks = new ArrayList<>();
-        for (AlcoholDrinkDto alcoholDrinkDto : orderDto.getDrinks()) {
-            alcoholDrinks.add(alcoholDrinkMapper.dtoToObject(alcoholDrinkDto, new AlcoholDrink()));
-        }
-        order.setAlcoholDrinks(alcoholDrinks);
-        return order;
-    }
+//    public Order dtoToObject(OrderDto orderDto) {
+//        Order order = new Order();
+//        List<AlcoholDrink> alcoholDrinks = new ArrayList<>();
+//        for (AlcoholDrinkDto alcoholDrinkDto : orderDto.getDrinks()) {
+//            alcoholDrinks.add(alcoholDrinkMapper.dtoToObject(alcoholDrinkDto, new AlcoholDrink()));
+//        }
+//        order.setAlcoholDrinks(alcoholDrinks);
+//        return order;
+//    }
 
 }

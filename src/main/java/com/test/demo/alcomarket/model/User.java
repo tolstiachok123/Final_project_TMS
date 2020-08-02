@@ -35,7 +35,7 @@ public class User {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Role> roles;
-//
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    private List<Order> orders;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Order> orders;
 }

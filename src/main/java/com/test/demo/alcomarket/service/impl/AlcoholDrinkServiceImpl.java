@@ -43,19 +43,19 @@ public class AlcoholDrinkServiceImpl implements IAlcoholDrinkService {
     }
 
     @Override
-    public AlcoholDrinkDto findById(Integer id) {
-        return alcoholDrinkMapper.objectToDto(IAlcoholDrinkRepository.getOne(id));
+    public AlcoholDrink findById(Integer id) {
+        return IAlcoholDrinkRepository.getOne(id);
     }
 
     @Override
-    public void update(Integer id, AlcoholDrinkDto alcoholDrinkDto) {
-        AlcoholDrink alcoholDrink = IAlcoholDrinkRepository.getOne(id);
-        IAlcoholDrinkRepository.saveAndFlush(alcoholDrinkMapper.dtoToObject(alcoholDrinkDto, alcoholDrink));
+    public void update(Integer id, AlcoholDrink alcoholDrink) {
+        AlcoholDrink oldAlcoholDrink = IAlcoholDrinkRepository.getOne(id);
+        alcoholDrink.setId(oldAlcoholDrink.getId());
+        IAlcoholDrinkRepository.saveAndFlush(alcoholDrink);
     }
 
     @Override
-    public void addNew(AlcoholDrinkDto alcoholDrinkDto) {
-        AlcoholDrink alcoholDrink = alcoholDrinkMapper.dtoToObject(alcoholDrinkDto, new AlcoholDrink());
+    public void addNew(AlcoholDrink alcoholDrink) {
         IAlcoholDrinkRepository.saveAndFlush(alcoholDrink);
     }
 
@@ -66,7 +66,7 @@ public class AlcoholDrinkServiceImpl implements IAlcoholDrinkService {
 
     @Override
     public void addToBasket(Integer alcoholId) {
-        Order order = orderMapper.dtoToObject(orderService.getCurrentOrCreateOrder());
+        Order order = orderService.getCurrentOrCreateOrder();
         AlcoholDrink alcoholDrink = IAlcoholDrinkRepository.getOne(alcoholId);
         order.getAlcoholDrinks().add(alcoholDrink);
         orderService.update(order);
