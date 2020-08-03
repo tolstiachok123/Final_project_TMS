@@ -70,7 +70,8 @@ public class AlcoholDrinkServiceImpl implements IAlcoholDrinkService {
     public void addToBasket(Integer alcoholId) {
         Order order = orderService.getCurrentOrCreateOrder();
         AlcoholDrink alcoholDrink = IAlcoholDrinkRepository.getOne(alcoholId);
-        order.getAlcoholDrinks().add(alcoholDrink);
+        alcoholDrink.getOrders().add(order);
+//        order.getAlcoholDrinks().add(alcoholDrink);
         orderService.update(order);
     }
 

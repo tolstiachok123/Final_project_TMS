@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 
 @Slf4j
@@ -21,13 +22,15 @@ public class OrderServiceImpl implements IOrderService {
     private OrderMapper orderMapper;
     private final IUserService userService;
     private UserMapper userMapper;
+    private EntityManager entityManager;
 
     @Autowired
-    OrderServiceImpl(IOrderRepository orderRepository, IUserService userService, OrderMapper orderMapper, UserMapper userMapper) {
+    OrderServiceImpl(IOrderRepository orderRepository, IUserService userService, OrderMapper orderMapper, UserMapper userMapper, EntityManager entityManager) {
         this.orderRepository = orderRepository;
         this.userService = userService;
         this.orderMapper = orderMapper;
         this.userMapper = userMapper;
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -58,7 +61,10 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public void update(Order order) {
-        orderRepository.save(order);
+        entityManager.persist(order);
+        orderRepository.saveAndFlush(order);
+        orderRepository.flush();
+        entityManager.flush();
     }
 
     @Override
