@@ -51,6 +51,19 @@ git clone https://github.com/tolstiachok123/Final_project_TMS.git
 9. localhost:8085/manufacturers/{id} (DELETE) - удаление производителя
 10. localhost:8085/order/{id} (DELETE) - удаление заказа
 
-Запустите Postman, создайте вкладку с POST-запросом по адресу "localhost:8085/registration" и заполните значения JSON по аналогии с изображением ниже:
+Запустите Postman. 
+Создайте вкладку с POST-запросом по адресу "localhost:8085/registration", выберите Body -> raw -> JSON и заполните все пары своими данными:
+{
+    "username": "Username",
+    "email": "user@gmail.com",
+    "phone": "+37529...",
+    "password": "user password"
+}
+Нажмите кнопку Send. 
+
+Поздравляю, Вы зарегистрированы, но ещё не авторизованы. Создайте вкладку с POST-запросом по адресу "localhost:8085/login", выберите Body -> form-data. В таблице в столбце KEY создайте 2 строки username и password. В соседнем столбце VALUE введите соответствующие значения профиля который Вы зарегистрировали ранее. Нажмите кнопку Send. Поздравляю, Вы авторизованы как USER.
+
+Если Вы хотите авторизоваться с ролью ADMIN - перезапустите приложение, создайте POST-запрос по адресу "localhost:8085/login", но сейчас в столбце VALUE введите значения "Roman" и "123". Нажмите кнопку Send. Поздравляю, Вы авторизованы как USER и ADMIN.
+
 
 
