@@ -1,6 +1,6 @@
 # Final_project_TMS
 
-##### API онлайн-магазина спиртных напитков
+### API онлайн-магазина спиртных напитков
 
 ## Установка
 
@@ -40,16 +40,16 @@ git clone https://github.com/tolstiachok123/Final_project_TMS.git
 11. localhost:8085/user (GET) - информация о текущем пользователе (Вас)
 
 Конечные точки только для ADMIN:
-1. 
-2.
-3.
-4.
-5.
-6.
-7.
-8.
-9.
-10.
+1. localhost:8085/users (GET) - список всех пользователей
+2. localhost:8085/users/{id} (GET) - информация о конкретном пользователе
+3. localhost:8085/users/{id} (DELETE) - удаление пользователя
+4. localhost:8085/drinks (POST) - добавление нового алкогольного напитка
+5. localhost:8085/drinks/{id} (PUT) - изменение конкретного алкогольного напитка
+6. localhost:8085/drinks/{id} (DELETE) - удаление алкогольного напитка
+7. localhost:8085/manufacturer (POST) - добавление нового производителя
+8. localhost:8085/manufacturers/{id} (PUT) - измменение конкретного производителя
+9. localhost:8085/manufacturers/{id} (DELETE) - удаление производителя
+10. localhost:8085/order/{id} (DELETE) - удаление заказа
 
 Запустите Postman, создайте вкладку с POST-запросом по адресу "localhost:8085/registration" и заполните значения JSON по аналогии с изображением ниже:
 
