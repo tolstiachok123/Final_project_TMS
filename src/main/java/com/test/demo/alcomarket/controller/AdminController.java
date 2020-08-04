@@ -71,6 +71,11 @@ public class AdminController {
         manufacturerService.addNew(manufacturerMapper.dtoToObject(manufacturerDto));
     }
 
+    @PutMapping(value = "/manufacturers/{id}")
+    public void updateById(@PathVariable(name = "id") Integer id, @RequestBody ManufacturerDto manufacturerDto) {
+        manufacturerService.update(id, manufacturerMapper.dtoToObject(manufacturerDto));
+    }
+
     @DeleteMapping(value = "/manufacturers/{id}")
     public void deleteManufacturerById(@PathVariable(name = "id") Integer id) {
         manufacturerService.deleteById(id);
