@@ -19,14 +19,12 @@ import java.util.Collection;
 @Component
 public class AppAuthenticationProvider implements AuthenticationProvider {
 
-    private final UserDetailsService detailsService;
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    @Qualifier("appUserDetailsService")
+    private UserDetailsService detailsService;
 
     @Autowired
-    public AppAuthenticationProvider(@Qualifier("appUserDetailsService") UserDetailsService detailsService, PasswordEncoder passwordEncoder) {
-        this.detailsService = detailsService;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(Authentication auth) throws AuthenticationException {

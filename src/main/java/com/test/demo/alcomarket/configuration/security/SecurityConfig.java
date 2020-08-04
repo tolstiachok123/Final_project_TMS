@@ -20,14 +20,11 @@ import org.springframework.security.web.context.request.async.WebAsyncManagerInt
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final AuthenticationProvider securityProvider;
-    private final AccessDeniedHandler securityHandler;
+    @Autowired
+    private AuthenticationProvider securityProvider;
 
     @Autowired
-    SecurityConfig(AuthenticationProvider securityProvider, AccessDeniedHandler securityHandler) {
-        this.securityProvider = securityProvider;
-        this.securityHandler = securityHandler;
-    }
+    private AccessDeniedHandler securityHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
