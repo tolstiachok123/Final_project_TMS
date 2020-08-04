@@ -26,7 +26,7 @@ git clone https://github.com/tolstiachok123/Final_project_TMS.git
 
 После успешного запуска можно перейти в браузер, набрать в поисковой строке "http://localhost:8085" и начать работу с API, но есть варианты удобнее. Рекомендую использовать Postman [ссылка на скачивание Postman]{https://www.postman.com/downloads/}. 
 
-Ключевые конечные точки:
+Конечные точки для USER и ADMIN:
 1. localhost:8085/registration (POST) - регистрация нового пользователя
 2. localhost:8085/login (POST) - авторизация пользователя
 3. localhost:8085/drinks (GET) - список всех алкогольных напитков
@@ -34,9 +34,22 @@ git clone https://github.com/tolstiachok123/Final_project_TMS.git
 5. localhost:8085/drinks/{id}/basket (POST) - добавление конкретного алкогольного напитка в корзину
 6. localhost:8085/manufacturers (GET) - список всех производителей
 7. localhost:8085/manufacturers/{id} (GET) - информация о конкретном производителе
-8. localhost:8085/
-9. localhost:8085/
-10. localhost:8085/
+8. localhost:8085/order/current (GET) - текущий заказ (пустой если Вы ничего не заказывали)
+9. localhost:8085/order/{id} (GET) - информация о конкретном заказе
+10. localhost:8085/order/current/pay (POST) - оплата и завершение текущего заказа
+11. localhost:8085/user (GET) - информация о текущем пользователе (Вас)
+
+Конечные точки только для ADMIN:
+1. 
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
 
 Запустите Postman, создайте вкладку с POST-запросом по адресу "localhost:8085/registration" и заполните значения JSON по аналогии с изображением ниже:
 
