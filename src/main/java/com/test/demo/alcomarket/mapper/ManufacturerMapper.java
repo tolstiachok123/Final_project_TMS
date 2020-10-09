@@ -2,27 +2,24 @@ package com.test.demo.alcomarket.mapper;
 
 import com.test.demo.alcomarket.dto.ManufacturerDto;
 import com.test.demo.alcomarket.model.Manufacturer;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 public class ManufacturerMapper {
 
+    @Autowired
+    private ModelMapper mapper;
+
     public ManufacturerDto objectToDto(Manufacturer manufacturer) {
-        ManufacturerDto manufacturerDto = new ManufacturerDto();
-        manufacturerDto.setDescription(manufacturer.getDescription());
-        manufacturerDto.setLink(manufacturer.getLink());
-        manufacturerDto.setLogoPath(manufacturer.getLogoPath());
-        manufacturerDto.setName(manufacturer.getName());
-        return manufacturerDto;
+        return Objects.isNull(manufacturer) ? null : mapper.map(manufacturer, ManufacturerDto.class);
     }
 
     public Manufacturer dtoToObject(ManufacturerDto manufacturerDto) {
-        Manufacturer manufacturer = new Manufacturer();
-        manufacturer.setDescription(manufacturerDto.getDescription());
-        manufacturer.setLink(manufacturerDto.getLink());
-        manufacturer.setLogoPath(manufacturerDto.getLogoPath());
-        manufacturer.setName(manufacturerDto.getName());
-        return manufacturer;
+        return Objects.isNull(manufacturerDto) ? null : mapper.map(manufacturerDto, Manufacturer.class);
     }
 
 }

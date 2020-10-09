@@ -1,41 +1,25 @@
 package com.test.demo.alcomarket.mapper;
 
-import com.test.demo.alcomarket.dto.AlcoholDrinkDto;
 import com.test.demo.alcomarket.dto.OrderDto;
-import com.test.demo.alcomarket.model.AlcoholDrink;
 import com.test.demo.alcomarket.model.Order;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 @Service
 public class OrderMapper {
 
-    private AlcoholDrinkMapper alcoholDrinkMapper;
-
-    OrderMapper(AlcoholDrinkMapper alcoholDrinkMapper) {
-        this.alcoholDrinkMapper = alcoholDrinkMapper;
-    }
+    @Autowired
+    private ModelMapper mapper;
 
     public OrderDto objectToDto(Order order) {
-        OrderDto orderDto = new OrderDto();
-        List<AlcoholDrinkDto> alcoholDrinkDtos = new ArrayList<>();
-        for (AlcoholDrink alcoholDrink : order.getAlcoholDrinks()) {
-            alcoholDrinkDtos.add(alcoholDrinkMapper.objectToDto(alcoholDrink));
-        }
-        orderDto.setDrinks(alcoholDrinkDtos);
-        return orderDto;
+        return Objects.isNull(order) ? null : mapper.map(order, OrderDto.class);
     }
 
-//    public Order dtoToObject(OrderDto orderDto) {
-//        Order order = new Order();
-//        List<AlcoholDrink> alcoholDrinks = new ArrayList<>();
-//        for (AlcoholDrinkDto alcoholDrinkDto : orderDto.getDrinks()) {
-//            alcoholDrinks.add(alcoholDrinkMapper.dtoToObject(alcoholDrinkDto, new AlcoholDrink()));
-//        }
-//        order.setAlcoholDrinks(alcoholDrinks);
-//        return order;
-//    }
+    public Order dtoToObject(OrderDto orderDto) {
+        return Objects.isNull(orderDto) ? null : mapper.map(orderDto, Order.class);
+    }
 
 }
