@@ -15,26 +15,10 @@ public class AlcoholDrinkMapper {
     private ModelMapper mapper;
 
     public AlcoholDrink dtoToObject(AlcoholDrinkDto alcoholDrinkDto) {
-//        AlcoholDrink alcoholDrink = new AlcoholDrink();
-//        alcoholDrink.setAdv(alcoholDrinkDto.getAdv());
-//        alcoholDrink.setCost(alcoholDrinkDto.getCost());
-//        alcoholDrink.setName(alcoholDrinkDto.getName());
-//        alcoholDrink.setPhotoPath(alcoholDrinkDto.getPhotoPath());
-//        alcoholDrink.setQuantity(alcoholDrinkDto.getQuantity());
-//        alcoholDrink.setType(alcoholDrinkDto.getType());
-//        return alcoholDrink;
         return Objects.isNull(alcoholDrinkDto) ? null : mapper.map(alcoholDrinkDto, AlcoholDrink.class);
     }
 
     public AlcoholDrinkDto objectToDto(AlcoholDrink alcoholDrink) {
-//        AlcoholDrinkDto alcoholDrinkDto = new AlcoholDrinkDto();
-//        alcoholDrinkDto.setAdv(alcoholDrink.getAdv());
-//        alcoholDrinkDto.setCost(alcoholDrink.getCost());
-//        alcoholDrinkDto.setName(alcoholDrink.getName());
-//        alcoholDrinkDto.setPhotoPath(alcoholDrink.getPhotoPath());
-//        alcoholDrinkDto.setQuantity(alcoholDrink.getQuantity());
-//        alcoholDrinkDto.setType(alcoholDrink.getType());
-//        return alcoholDrinkDto;
         return Objects.isNull(alcoholDrink) ? null : mapper.map(alcoholDrink, AlcoholDrinkDto.class);
     }
 
