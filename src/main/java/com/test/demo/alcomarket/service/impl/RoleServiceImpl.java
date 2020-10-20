@@ -3,14 +3,12 @@ package com.test.demo.alcomarket.service.impl;
 import com.test.demo.alcomarket.model.Role;
 import com.test.demo.alcomarket.repository.IRoleRepository;
 import com.test.demo.alcomarket.service.IRoleService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Slf4j
 @Service
 @Transactional
 public class RoleServiceImpl implements IRoleService {

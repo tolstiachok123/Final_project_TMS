@@ -3,7 +3,6 @@ package com.test.demo.alcomarket.configuration.security;
 import com.test.demo.alcomarket.security.CorsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,7 +15,6 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 
 @Configuration
-@ComponentScan
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

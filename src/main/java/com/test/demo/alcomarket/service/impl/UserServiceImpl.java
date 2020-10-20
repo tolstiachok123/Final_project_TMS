@@ -6,7 +6,6 @@ import com.test.demo.alcomarket.model.User;
 import com.test.demo.alcomarket.repository.IUserRepository;
 import com.test.demo.alcomarket.security.CustomPrincipal;
 import com.test.demo.alcomarket.service.IUserService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
 @Service
 @Transactional
 public class UserServiceImpl implements IUserService {

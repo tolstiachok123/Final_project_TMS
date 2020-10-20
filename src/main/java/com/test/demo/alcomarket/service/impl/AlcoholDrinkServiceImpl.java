@@ -8,7 +8,6 @@ import com.test.demo.alcomarket.model.Order;
 import com.test.demo.alcomarket.repository.IAlcoholDrinkRepository;
 import com.test.demo.alcomarket.service.IAlcoholDrinkService;
 import com.test.demo.alcomarket.service.IOrderService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,6 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
 @Service
 @Transactional
 public class AlcoholDrinkServiceImpl implements IAlcoholDrinkService {
