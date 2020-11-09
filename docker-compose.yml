@@ -3,28 +3,31 @@ version: '3'
 services:
   db:
     image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      - MYSQL_USER = user
-      - MYSQL_PASSWORD = 9109
-      - MYSQL_ROOT_PASSWORD = 9109
-      - MYSQL_DATABASE = alcoholmarket
-  ports:
-    - '3309:3306'
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=9109
+      - MYSQL_ROOT_PASSWORD=9109
+      - MYSQL_DATABASE=alcoholmarket
+    ports:
+      - '3309:3306'
 
   app:
     image: alcomarket
     restart: on-failure
-    depends_on:
+    links:
       - db
+    #    depends_on:
+    #      - db
     ports:
       - 8080:8080
     environment:
-      - DATABASE_HOST = db
-      - DATABASE_USER = user
-      - DATABASE_PASSWORD = 9109
-      - DATABASE_NAME = alcoholmarket
-      - DATABASE_PORT = 3306
+      - DATABASE_HOST=db
+      - DATABASE_USER=user
+      - DATABASE_PASSWORD=9109
+      - DATABASE_NAME=alcoholmarket
+      - DATABASE_PORT=3306
 
 
 
