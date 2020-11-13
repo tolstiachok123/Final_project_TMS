@@ -5,30 +5,34 @@ services:
     image: mysql:latest
     command: --default-authentication-plugin=mysql_native_password
     restart: always
+    networks:
+      - spring-boot-rest-mysql-network
     environment:
-      - MYSQL_USER=user
       - MYSQL_PASSWORD=9109
       - MYSQL_ROOT_PASSWORD=9109
       - MYSQL_DATABASE=alcoholmarket
     ports:
-      - '3309:3306'
+      - 3310:3306
+    container_name: 'mysqldb'
 
   app:
     image: alcomarket
+    build:
+      dockerfile: Dockerfile
+      context: .
+    networks:
+      - spring-boot-rest-mysql-network
     restart: on-failure
-    links:
-      - db
-    #    depends_on:
-    #      - db
     ports:
-      - 8080:8080
+      - 8085:8085
     environment:
-      - DATABASE_HOST=db
-      - DATABASE_USER=user
+      - DATABASE_USER=root
       - DATABASE_PASSWORD=9109
-      - DATABASE_NAME=alcoholmarket
-      - DATABASE_PORT=3306
+      - DATABASE_URL=jdbc:mysql://db:3306/alcoholmarket?useUnicode=true&serverTimezone=UTC&useSSL=true&verifyServerCertificate=false
 
+networks:
+  spring-boot-rest-mysql-network:
+    driver: bridge
 
 
 
