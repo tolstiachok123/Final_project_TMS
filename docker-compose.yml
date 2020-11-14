@@ -22,6 +22,8 @@ services:
       context: .
     networks:
       - spring-boot-rest-mysql-network
+    healthcheck:
+      test: db
     restart: on-failure
     ports:
       - 8085:8085
