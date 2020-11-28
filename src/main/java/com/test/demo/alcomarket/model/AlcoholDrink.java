@@ -33,7 +33,7 @@ public class AlcoholDrink {
     private double adv;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "manufacturer_id", insertable=false, updatable=false)
+    @JoinColumn(name = "manufacturer_id", insertable = false, updatable = false)
     private Manufacturer manufacturer;
 
     @ManyToMany(fetch = FetchType.EAGER)

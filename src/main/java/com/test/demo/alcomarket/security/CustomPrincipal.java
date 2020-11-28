@@ -16,8 +16,8 @@ public class CustomPrincipal implements UserDetails {
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        return  null;
-       // return user.getRoles().stream().map(it -> new SimpleGrantedAuthority(it.getName().name())).collect(Collectors.toList());
+        return null;
+        // return user.getRoles().stream().map(it -> new SimpleGrantedAuthority(it.getName().name())).collect(Collectors.toList());
     }
 
     @Override
@@ -50,5 +50,7 @@ public class CustomPrincipal implements UserDetails {
         return user.isActive();
     }
 
-    public Integer getId() { return user.getId(); }
+    public Integer getId() {
+        return user.getId();
+    }
 }

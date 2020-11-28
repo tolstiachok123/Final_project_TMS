@@ -29,12 +29,12 @@ public class AppAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication auth) throws AuthenticationException {
         CustomPrincipal userDetails = (CustomPrincipal) detailsService.loadUserByUsername(auth.getName());
-        if(userDetails == null) {
+        if (userDetails == null) {
             throw new UsernameNotFoundException(String.format("User not found: %s", auth.getName()));
         }
         String password = auth.getCredentials().toString();
 
-        if(!passwordEncoder.matches(password, userDetails.getPassword())){
+        if (!passwordEncoder.matches(password, userDetails.getPassword())) {
             throw new BadCredentialsException("Incorrect username or password");
         }
         Collection<GrantedAuthority> authorities = userDetails.getAuthorities();

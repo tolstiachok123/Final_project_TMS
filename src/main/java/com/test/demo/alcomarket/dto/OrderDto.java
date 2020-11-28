@@ -10,5 +10,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDto {
-     private List<AlcoholDrinkDto> drinks;
+    private List<AlcoholDrinkDto> drinks;
 }

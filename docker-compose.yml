@@ -13,7 +13,6 @@ services:
       - MYSQL_DATABASE=alcoholmarket
     ports:
       - 3310:3306
-    container_name: 'mysqldb'
 
   app:
     image: alcomarket
@@ -22,8 +21,8 @@ services:
       context: .
     networks:
       - spring-boot-rest-mysql-network
-    healthcheck:
-      test: db
+    #    healthcheck:
+    #      test: db
     restart: on-failure
     ports:
       - 8085:8085
