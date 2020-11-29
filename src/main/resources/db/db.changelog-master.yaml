@@ -1,0 +1,187 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-lesson1.yaml src/main/resources/db/db.changelog-master.yaml
+  - changeSet:
+      id: 1
+        author: tolstiachok123
+        comment: "Create db structure"
+        changes:
+          - createTable:
+              tableName: alcohol_drink
+              columns:
+                - column:
+                    name: id
+                    type: INT
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                    name: adv
+                    type: double
+                    constraints:
+                      nullable: false
+                - column:
+                    name: cost
+                    type: double
+                    constraints:
+                      nullable: false
+                - column:
+                    name: name
+                    type: varchar(255)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: photo_path
+                    type: varchar(255)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: quantity
+                    type: INT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: tupe
+                    type: varchar(255)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: manufacturer_id
+                    type: varchar(255)
+                    constraints:
+                      foreignKeyName: "alcohol_drink_manufacturer_id_fk"
+                      references: "manufacturer(id)"
+                      nullable: false
+          - createTable:
+              tableName: manufacturer
+              columns:
+                - column:
+                    name: id
+                    type: INT
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                    name: description
+                    type: varchar(255)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: link
+                    type: varchar(255)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: logo_path
+                    type: varchar(255)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: name
+                    type: varchar(255)
+                    constraints:
+                      nullable: false
+          - createTable:
+              tableName: orders
+              columns:
+                - column:
+                    name: id
+                    type: INT
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                    name: status
+                    type: bit(1)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: user_id
+                    type: INT
+                    constraints:
+                      foreignKeyName: "orders_user_id_fk"
+                      references: "user(id)"
+                      nullable: false
+          - createTable:
+              tableName: user
+              columns:
+                - column:
+                    name: id
+                    type: INT
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                    name: active
+                    type: bit(1)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: email
+                    type: varchar(255)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: password
+                    type: varchar(255)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: phone
+                    type: varchar(255)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: username
+                    type: varchar(255)
+                    constraints:
+                      nullable: false
+          - createTable:
+              tableName: role
+              columns:
+                - column:
+                    name: id
+                    type: INT
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                    name: name
+                    type: varchar(255)
+                    constraints:
+                      nullable: false
+
+
+  - changeSet:
+      id: 2
+      author: tolstiachok123
+      comment: "Set default values"
+      changes:
+        - insert:
+            tableName: alcohol_drink
+            columns:
+              - column:
+                  name: username
+                  value: "admin"
+              - column:
+                  name: password
+                  value: "admin"
+              - column:
+                  name: email
+                  value: "admin@server.com"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: username
+                  value: "guest"
+              - column:
+                  name: password
+                  value: "guest"
+              - column:
+                  name: email
+                  value: "guest@server.com"
