@@ -165,23 +165,228 @@ databaseChangeLog:
             tableName: alcohol_drink
             columns:
               - column:
-                  name: username
-                  value: "admin"
+                  name: adv
+                  value: 17
               - column:
-                  name: password
-                  value: "admin"
+                  name: cost
+                  value: 35
+              - column:
+                  name: name
+                  value: "Baileys"
+              - column:
+                  name: photo_path
+                  value: "https://dydza6t6xitx6.cloudfront.net/ci-baileys-irish-cream-original-d59754a2faf3570f.jpeg"
+              - column:
+                  name: quantity
+                  value: 10
+              - column:
+                  name: type
+                  value: "LIQUEUR"
+              - column:
+                  name: manufacturer_id
+                  value: 1
+        - insert:
+            tableName: alcohol_drink
+            columns:
+              - column:
+                  name: adv
+                  value: 45
+              - column:
+                  name: cost
+                  value: 30
+              - column:
+                  name: name
+                  value: "Angostura"
+              - column:
+                  name: photo_path
+                  value: "https://cdn.diffords.com/contrib/bws/2019/03/5c878a9d41f45.jpg"
+              - column:
+                  name: quantity
+                  value: 3
+              - column:
+                  name: type
+                  value: "BITTER"
+              - column:
+                  name: manufacturer_id
+                  value: 4
+        - insert:
+            tableName: alcohol_drink
+            columns:
+              - column:
+                  name: adv
+                  value: 12
+              - column:
+                  name: cost
+                  value: 7
+              - column:
+                  name: name
+                  value: "Абрау-Дюрсо"
+              - column:
+                  name: photo_path
+                  value: "https://s.winestyle.ru/images_gen/907/90718/0_0_orig.jpg"
+              - column:
+                  name: quantity
+                  value: 33
+              - column:
+                  name: type
+                  value: "VINE"
+              - column:
+                  name: manufacturer_id
+                  value: 3
+
+        - insert:
+            tableName: manufacturer
+            columns:
+              - column:
+                  name: description
+                  value: "Once upon a time, a small, let’s say, determined group had a brilliant but lofty idea where they tried to have their cake and eat it too."
+              - column:
+                  name: link
+                  value: "https://www.baileys.com/en/"
+              - column:
+                  name: logo_path
+                  value: "https://www.baileys.com/images/baileys_logo_01.png"
+              - column:
+                  name: name
+                  value: "Baileys"
+        - insert:
+            tableName: manufacturer
+            columns:
+              - column:
+                  name: description
+                  value: "In 1860, liquorist Gaspare Campari invented the striking red aperitif: the secret recipe still keeps the name of its original creator. Hohenstein, Dudovich, Depero, Cappiello…"
+              - column:
+                  name: link
+                  value: "https://www.camparigroup.com/en"
+              - column:
+                  name: logo_path
+                  value: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Campari_Group.svg/190px-Campari_Group.svg.png"
+              - column:
+                  name: name
+                  value: "Campari Group"
+        - insert:
+            tableName: manufacturer
+            columns:
+              - column:
+                  name: description
+                  value: "Завод «Абрау-Дюрсо» ведёт историю от даты указа императора Александра II — 25 ноября 1870 года у озера Абрау и реки Дюрсо было создано удельное имение «Абрау-Дюрсо», которое стало принадлежать царской семье."
+              - column:
+                  name: link
+                  value: "https://www.abraudurso.ru/"
+              - column:
+                  name: logo_path
+                  value: "https://www.google.de/url?sa=i&url=https%3A%2F%2Ftoplogos.ru%2Flogo-abrau-dyurso%2F&psig=AOvVaw3-uv7EYznx4fZDZ0kkstxc&ust=1596391093458000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMDcurLK-uoCFQAAAAAdAAAAABAD"
+              - column:
+                  name: name
+                  value: "Абрау-Дюрсо"
+        - insert:
+            tableName: manufacturer
+            columns:
+              - column:
+                  name: description
+                  value: "Angostura is one of the Caribbean’s leading rum producers with a superb collection of rum brands and is the world’s market leader for bitters."
+              - column:
+                  name: link
+                  value: "http://www.angostura.com/"
+              - column:
+                  name: logo_path
+                  value: "https://www.google.de/url?sa=i&url=https%3A%2F%2Fwww.artisan-spirits.co.uk%2Fbrands%2Fattachment%2Fangostura-aromatic-bitters-2%2F&psig=AOvVaw3WD4IjQqRPXVnfMNiMVHsM&ust=1596391211796000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOCgwvHK-uoCFQAAAAAdAAAAABAD"
+              - column:
+                  name: name
+                  value: "Angostura"
+
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  name: status
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 1
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  name: status
+                  value: 0
+              - column:
+                  name: user_id
+                  value: 2
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  name: status
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 2
+
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: active
+                  value: 1
               - column:
                   name: email
-                  value: "admin@server.com"
+                  value: "sergey_andr1998@mail.ru"
+              - column:
+                  name: password
+                  value: "$2y$12$B5RBo0y9a6fPRIvnz2c1VOoGApLmbKQllyE7gAw1SGuLNW0tN0NPG"
+              - column:
+                  name: phone
+                  value: "2320545"
+              - column:
+                  name: username
+                  value: "tolstiachok123"
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: active
+                  value: 1
+              - column:
+                  name: email
+                  value: "java_nagibator@gmail.com"
+              - column:
+                  name: password
+                  value: "$2y$12$B5RBo0y9a6fPRIvnz2c1VOoGApLmbKQllyE7gAw1SGuLNW0tN0NPG"
+              - column:
+                  name: phone
+                  value: "7788"
+              - column:
+                  name: username
+                  value: "Roman"
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: active
+                  value: 1
+              - column:
+                  name: email
+                  value: "kuramawers@gmail.com"
+              - column:
+                  name: password
+                  value: "$2a$10$OHGOW.BxeQGYDbsjxd2d1uwixH.ds2gBvF0c57wsupsdDlf/TreCe"
+              - column:
+                  name: phone
+                  value: "80299058229"
+              - column:
+                  name: username
+                  value: "Kurama"
+
         - insert:
             tableName: role
             columns:
               - column:
-                  name: username
-                  value: "guest"
+                  name: name
+                  value: "ADMIN"
+        - insert:
+            tableName: role
+            columns:
               - column:
-                  name: password
-                  value: "guest"
-              - column:
-                  name: email
-                  value: "guest@server.com"
+                  name: name
+                  value: "USER"
