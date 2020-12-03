@@ -154,6 +154,40 @@ databaseChangeLog:
                     type: varchar(255)
                     constraints:
                       nullable: false
+          - createTable:
+              tableName: user_roles
+              columns:
+                - column:
+                    name: user_id
+                    type: INT
+                    constraints:
+                      foreignKeyName: "user_roles_user_id_fk"
+                      references: "user(id)"
+                      nullable: false
+                - column:
+                    name: roles_id
+                    type: INT
+                    constraints:
+                      foreignKeyName: "user_roles_role_id_fk"
+                      references: "role(id)"
+                      nullable: false
+          - createTable:
+              tableName: alcohol_drink_orders
+              columns:
+                - column:
+                    name: alcohol_drinks_id
+                    type: INT
+                    constraints:
+                      foreignKeyName: "alcohol_drink_orders_alcohol_drink_id_fk"
+                      references: "alcohol_drink(id)"
+                      nullable: false
+                - column:
+                    name: orders_id
+                    type: INT
+                    constraints:
+                      foreignKeyName: "alcohol_drink_orders_orders_id_fk"
+                      references: "orders(id)"
+                      nullable: false
 
 
   - changeSet:
