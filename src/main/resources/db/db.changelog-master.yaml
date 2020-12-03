@@ -424,3 +424,59 @@ databaseChangeLog:
               - column:
                   name: name
                   value: "USER"
+
+        - insert:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: roless_id
+                  value: 1
+        - insert:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: roles_id
+                  value: 1
+        - insert:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: roles_id
+                  value: 1
+
+        - insert:
+            tableName: alcohol_drink_orders
+            columns:
+              - column:
+                  name: alcohol_drinks_id
+                  value: 1
+              - column:
+                  name: orders_id
+                  value: 1
+        - insert:
+            tableName: alcohol_drink_orders
+            columns:
+              - column:
+                  name: alcohol_drinks_id
+                  value: 1
+              - column:
+                  name: orders_id
+                  value: 2
+        - insert:
+            tableName: alcohol_drink_orders
+            columns:
+              - column:
+                  name: alcohol_drinks_id
+                  value: 3
+              - column:
+                  name: orders_id
+                  value: 3
