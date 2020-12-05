@@ -21,7 +21,7 @@ import org.springframework.security.web.context.request.async.WebAsyncManagerInt
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private final JwtTokenProvider jwtTokenProvider;
+    private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
     private AuthenticationProvider securityProvider;
@@ -57,6 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling().accessDeniedHandler(securityHandler)
                 .and()
-                .apply(new JwtConfigurer(jwtTokenProvider));
+                .apply(new JwtConfigurer());
     }
 }
