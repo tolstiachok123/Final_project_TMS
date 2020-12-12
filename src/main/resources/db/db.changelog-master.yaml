@@ -2,197 +2,195 @@ databaseChangeLog:
   - logicalFilePath: db/changelog/db.changelog-lesson1.yaml src/main/resources/db/db.changelog-master.yaml
   - changeSet:
       id: 1
-        author: tolstiachok123
-        comment: "Create db structure"
-        changes:
-          - createTable:
-              tableName: alcohol_drink
-              columns:
-                - column:
-                    name: id
-                    type: INT
-                    autoIncrement: true
-                    constraints:
-                      primaryKey: true
-                      nullable: false
-                - column:
-                    name: adv
-                    type: double
-                    constraints:
-                      nullable: false
-                - column:
-                    name: cost
-                    type: double
-                    constraints:
-                      nullable: false
-                - column:
-                    name: name
-                    type: varchar(255)
-                    constraints:
-                      nullable: false
-                - column:
-                    name: photo_path
-                    type: varchar(255)
-                    constraints:
-                      nullable: false
-                - column:
-                    name: quantity
-                    type: INT
-                    constraints:
-                      nullable: false
-                - column:
-                    name: tupe
-                    type: varchar(255)
-                    constraints:
-                      nullable: false
-                - column:
-                    name: manufacturer_id
-                    type: varchar(255)
-                    constraints:
-                      foreignKeyName: "alcohol_drink_manufacturer_id_fk"
-                      references: "manufacturer(id)"
-                      nullable: false
-          - createTable:
-              tableName: manufacturer
-              columns:
-                - column:
-                    name: id
-                    type: INT
-                    autoIncrement: true
-                    constraints:
-                      primaryKey: true
-                      nullable: false
-                - column:
-                    name: description
-                    type: varchar(255)
-                    constraints:
-                      nullable: false
-                - column:
-                    name: link
-                    type: varchar(255)
-                    constraints:
-                      nullable: false
-                - column:
-                    name: logo_path
-                    type: varchar(255)
-                    constraints:
-                      nullable: false
-                - column:
-                    name: name
-                    type: varchar(255)
-                    constraints:
-                      nullable: false
-          - createTable:
-              tableName: orders
-              columns:
-                - column:
-                    name: id
-                    type: INT
-                    autoIncrement: true
-                    constraints:
-                      primaryKey: true
-                      nullable: false
-                - column:
-                    name: status
-                    type: bit(1)
-                    constraints:
-                      nullable: false
-                - column:
-                    name: user_id
-                    type: INT
-                    constraints:
-                      foreignKeyName: "orders_user_id_fk"
-                      references: "user(id)"
-                      nullable: false
-          - createTable:
-              tableName: user
-              columns:
-                - column:
-                    name: id
-                    type: INT
-                    autoIncrement: true
-                    constraints:
-                      primaryKey: true
-                      nullable: false
-                - column:
-                    name: active
-                    type: bit(1)
-                    constraints:
-                      nullable: false
-                - column:
-                    name: email
-                    type: varchar(255)
-                    constraints:
-                      nullable: false
-                - column:
-                    name: password
-                    type: varchar(255)
-                    constraints:
-                      nullable: false
-                - column:
-                    name: phone
-                    type: varchar(255)
-                    constraints:
-                      nullable: false
-                - column:
-                    name: username
-                    type: varchar(255)
-                    constraints:
-                      nullable: false
-          - createTable:
-              tableName: role
-              columns:
-                - column:
-                    name: id
-                    type: INT
-                    autoIncrement: true
-                    constraints:
-                      primaryKey: true
-                      nullable: false
-                - column:
-                    name: name
-                    type: varchar(255)
-                    constraints:
-                      nullable: false
-          - createTable:
-              tableName: user_roles
-              columns:
-                - column:
-                    name: user_id
-                    type: INT
-                    constraints:
-                      foreignKeyName: "user_roles_user_id_fk"
-                      references: "user(id)"
-                      nullable: false
-                - column:
-                    name: roles_id
-                    type: INT
-                    constraints:
-                      foreignKeyName: "user_roles_role_id_fk"
-                      references: "role(id)"
-                      nullable: false
-          - createTable:
-              tableName: alcohol_drink_orders
-              columns:
-                - column:
-                    name: alcohol_drinks_id
-                    type: INT
-                    constraints:
-                      foreignKeyName: "alcohol_drink_orders_alcohol_drink_id_fk"
-                      references: "alcohol_drink(id)"
-                      nullable: false
-                - column:
-                    name: orders_id
-                    type: INT
-                    constraints:
-                      foreignKeyName: "alcohol_drink_orders_orders_id_fk"
-                      references: "orders(id)"
-                      nullable: false
+      comment: "Create db structure"
+      changes:
+        - createTable:
+          tableName: alcohol_drink
+          columns:
+            - column:
+                name: id
+                type: INT
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  nullable: false
+            - column:
+                name: adv
+                type: double
+                constraints:
+                  nullable: false
+            - column:
+                name: cost
+                type: double
+                constraints:
+                  nullable: false
+            - column:
+                name: name
+                type: varchar(255)
+                constraints:
+                  nullable: false
+            - column:
+                name: photo_path
+                type: varchar(255)
+                constraints:
+                  nullable: false
+            - column:
+                name: quantity
+                type: INT
+                constraints:
+                  nullable: false
+            - column:
+                name: tupe
+                type: varchar(255)
+                constraints:
+                  nullable: false
+            - column:
+                name: manufacturer_id
+                type: varchar(255)
+                constraints:
+                  foreignKeyName: "alcohol_drink_manufacturer_id_fk"
+                  references: "manufacturer(id)"
+                  nullable: false
+        - createTable:
+            tableName: manufacturer
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: link
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: logo_path
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - createTable:
+                  tableName: orders
+                  columns:
+                    - column:
+                        name: id
+                        type: INT
+                        autoIncrement: true
+                        constraints:
+                          primaryKey: true
+                          nullable: false
+                    - column:
+                        name: status
+                        type: bit(1)
+                        constraints:
+                          nullable: false
+                    - column:
+                        name: user_id
+                        type: INT
+                        constraints:
+                          foreignKeyName: "orders_user_id_fk"
+                          references: "user(id)"
+                          nullable: false
+              - createTable:
+                  tableName: user
+                  columns:
+                    - column:
+                        name: id
+                        type: INT
+                        autoIncrement: true
+                        constraints:
+                          primaryKey: true
+                          nullable: false
+                    - column:
+                        name: active
+                        type: bit(1)
+                        constraints:
+                          nullable: false
+                    - column:
+                        name: email
+                        type: varchar(255)
+                        constraints:
+                          nullable: false
+                    - column:
+                        name: password
+                        type: varchar(255)
+                        constraints:
+                          nullable: false
+                    - column:
+                        name: phone
+                        type: varchar(255)
+                        constraints:
+                          nullable: false
+                    - column:
+                        name: username
+                        type: varchar(255)
+                        constraints:
+                          nullable: false
+              - createTable:
+                  tableName: role
+                  columns:
+                    - column:
+                        name: id
+                        type: INT
+                        autoIncrement: true
+                        constraints:
+                          primaryKey: true
+                          nullable: false
+                    - column:
+                        name: name
+                        type: varchar(255)
+                        constraints:
+                          nullable: false
+              - createTable:
+                  tableName: user_roles
+                  columns:
+                    - column:
+                        name: user_id
+                        type: INT
+                        constraints:
+                          foreignKeyName: "user_roles_user_id_fk"
+                          references: "user(id)"
+                          nullable: false
+                    - column:
+                        name: roles_id
+                        type: INT
+                        constraints:
+                          foreignKeyName: "user_roles_role_id_fk"
+                          references: "role(id)"
+                          nullable: false
+              - createTable:
+                  tableName: alcohol_drink_orders
+                  columns:
+                    - column:
+                        name: alcohol_drinks_id
+                        type: INT
+                        constraints:
+                          foreignKeyName: "alcohol_drink_orders_alcohol_drink_id_fk"
+                          references: "alcohol_drink(id)"
+                          nullable: false
+                    - column:
+                        name: orders_id
+                        type: INT
+                        constraints:
+                          foreignKeyName: "alcohol_drink_orders_orders_id_fk"
+                          references: "orders(id)"
+                          nullable: false
 
 
   - changeSet:
       id: 2
-      author: tolstiachok123
       comment: "Set default values"
       changes:
         - insert:
