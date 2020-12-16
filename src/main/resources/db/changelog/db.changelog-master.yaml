@@ -1,481 +1,599 @@
 databaseChangeLog:
+#
+  #  # ROLE
+
   - changeSet:
       id: 1
       author: tolstiachok123
-    changes:
-      - createTable:
-        tableName: alcohol_drink
-        columns:
-          - column:
-            name: id
-            type: INT
-            autoIncrement: true
-            constraints:
-              primaryKey: true
-              nullable: false
-          - column:
-            name: adv
-            type: double
-            constraints:
-              nullable: false
-          - column:
-            name: cost
-            type: double
-            constraints:
-              nullable: false
-          - column:
-            name: name
-            type: varchar(255)
-            constraints:
-              nullable: false
-          - column:
-            name: photo_path
-            type: varchar(255)
-            constraints:
-              nullable: false
-          - column:
-            name: quantity
-            type: INT
-            constraints:
-              nullable: false
-          - column:
-            name: tupe
-            type: varchar(255)
-            constraints:
-              nullable: false
-          - column:
-            name: manufacturer_id
-            type: varchar(255)
-            constraints:
-              foreignKeyName: alcohol_drink_manufacturer_id_fk
-              references: manufacturer(id)
-              nullable: false
-      - createTable:
-        tableName: manufacturer
-        columns:
-          - column:
-            name: id
-            type: INT
-            autoIncrement: true
-            constraints:
-              primaryKey: true
-              nullable: false
-          - column:
-            name: description
-            type: varchar(255)
-            constraints:
-              nullable: false
-          - column:
-            name: link
-            type: varchar(255)
-            constraints:
-              nullable: false
-          - column:
-            name: logo_path
-            type: varchar(255)
-            constraints:
-              nullable: false
-          - column:
-            name: name
-            type: varchar(255)
-            constraints:
-              nullable: false
-      - createTable:
-        tableName: orders
-        columns:
-          - column:
-            name: id
-            type: INT
-            autoIncrement: true
-            constraints:
-              primaryKey: true
-              nullable: false
-          - column:
-            name: status
-            type: bit(1)
-            constraints:
-              nullable: false
-          - column:
-            name: user_id
-            type: INT
-            constraints:
-              foreignKeyName: orders_user_id_fk
-              references: user(id)
-              nullable: false
-      - createTable:
-        tableName: user
-        columns:
-          - column:
-            name: id
-            type: INT
-            autoIncrement: true
-            constraints:
-              primaryKey: true
-              nullable: false
-          - column:
-            name: active
-            type: bit(1)
-            constraints:
-              nullable: false
-          - column:
-            name: email
-            type: varchar(255)
-            constraints:
-              nullable: false
-          - column:
-            name: password
-            type: varchar(255)
-            constraints:
-              nullable: false
-          - column:
-            name: phone
-            type: varchar(255)
-            constraints:
-              nullable: false
-          - column:
-            name: username
-            type: varchar(255)
-            constraints:
-              nullable: false
-      - createTable:
-        tableName: role
-        columns:
-          - column:
-            name: id
-            type: INT
-            autoIncrement: true
-            constraints:
-              primaryKey: true
-              nullable: false
-          - column:
-            name: name
-            type: varchar(255)
-            constraints:
-              nullable: false
-      - createTable:
-        tableName: user_roles
-        columns:
-          - column:
-            name: user_id
-            type: INT
-            constraints:
-              foreignKeyName: user_roles_user_id_fk
-              references: user(id)
-              nullable: false
-          - column:
-            name: roles_id
-            type: INT
-            constraints:
-              foreignKeyName: user_roles_role_id_fk
-              references: role(id)
-              nullable: false
-      - createTable:
-        tableName: alcohol_drink_orders
-        columns:
-          - column:
-            name: alcohol_drinks_id
-            type: INT
-            constraints:
-              foreignKeyName: alcohol_drink_orders_alcohol_drink_id_fk
-              references: alcohol_drink(id)
-              nullable: false
-          - column:
-            name: orders_id
-            type: INT
-            constraints:
-              foreignKeyName: alcohol_drink_orders_orders_id_fk
-              references: orders(id)
-              nullable: false
-
+      changes:
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
   - changeSet:
       id: 2
       author: tolstiachok123
-    comment: Set default values
-    changes:
-      - insert:
-        tableName: alcohol_drink
-        columns:
-          - column:
-            name: adv
-            value: 17
-          - column:
-            name: cost
-            value: 35
-          - column:
-            name: name
-            value: Baileys
-          - column:
-            name: photo_path
-            value: https://dydza6t6xitx6.cloudfront.net/ci-baileys-irish-cream-original-d59754a2faf3570f.jpeg
-          - column:
-            name: quantity
-            value: 10
-          - column:
-            name: type
-            value: LIQUEUR
-          - column:
-            name: manufacturer_id
-            value: 1
-      - insert:
-        tableName: alcohol_drink
-        columns:
-          - column:
-            name: adv
-            value: 45
-          - column:
-            name: cost
-            value: 30
-          - column:
-            name: name
-            value: Angostura
-          - column:
-            name: photo_path
-            value: https://cdn.diffords.com/contrib/bws/2019/03/5c878a9d41f45.jpg
-          - column:
-            name: quantity
-            value: 3
-          - column:
-            name: type
-            value: BITTER
-          - column:
-            name: manufacturer_id
-            value: 4
-      - insert:
-        tableName: alcohol_drink
-        columns:
-          - column:
-            name: adv
-            value: 12
-          - column:
-            name: cost
-            value: 7
-          - column:
-            name: name
-            value: Абрау-Дюрсо
-          - column:
-            name: photo_path
-            value: https://s.winestyle.ru/images_gen/907/90718/0_0_orig.jpg
-          - column:
-            name: quantity
-            value: 33
-          - column:
-            name: type
-            value: VINE
-          - column:
-            name: manufacturer_id
-            value: 3
+      changes:
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: ADMIN
+  - changeSet:
+      id: 3
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: USER
 
-      - insert:
-        tableName: manufacturer
-        columns:
-          - column:
-            name: description
-            value: Once upon a time, a small, let’s say, determined group had a brilliant but lofty idea where they tried to have their cake and eat it too.
-          - column:
-            name: link
-            value: https://www.baileys.com/en/
-          - column:
-            name: logo_path
-            value: https://www.baileys.com/images/baileys_logo_01.png
-          - column:
-            name: name
-            value: Baileys
-      - insert:
-        tableName: manufacturer
-        columns:
-          - column:
-            name: description
-            value: In 1860, liquorist Gaspare Campari invented the striking red aperitif the secret recipe still keeps the name of its original creator. Hohenstein, Dudovich, Depero, Cappiello…
-          - column:
-            name: link
-            value: https://www.camparigroup.com/en
-          - column:
-            name: logo_path
-            value: https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Campari_Group.svg/190px-Campari_Group.svg.png
-          - column:
-            name: name
-            value: Campari Group
-      - insert:
-        tableName: manufacturer
-        columns:
-          - column:
-            name: description
-            value: Завод «Абрау-Дюрсо» ведёт историю от даты указа императора Александра II — 25 ноября 1870 года у озера Абрау и реки Дюрсо было создано удельное имение «Абрау-Дюрсо», которое стало принадлежать царской семье.
-          - column:
-            name: link
-            value: https://www.abraudurso.ru/
-          - column:
-            name: logo_path
-            value: https://www.google.de/url?sa=i&url=https%3A%2F%2Ftoplogos.ru%2Flogo-abrau-dyurso%2F&psig=AOvVaw3-uv7EYznx4fZDZ0kkstxc&ust=1596391093458000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMDcurLK-uoCFQAAAAAdAAAAABAD
-          - column:
-            name: name
-            value: Абрау-Дюрсо
-      - insert:
-        tableName: manufacturer
-        columns:
-          - column:
-            name: description
-            value: Angostura is one of the Caribbean’s leading rum producers with a superb collection of rum brands and is the world’s market leader for bitters.
-          - column:
-            name: link
-            value: http://www.angostura.com/
-          - column:
-            name: logo_path
-            value: https://www.google.de/url?sa=i&url=https%3A%2F%2Fwww.artisan-spirits.co.uk%2Fbrands%2Fattachment%2Fangostura-aromatic-bitters-2%2F&psig=AOvVaw3WD4IjQqRPXVnfMNiMVHsM&ust=1596391211796000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOCgwvHK-uoCFQAAAAAdAAAAABAD
-          - column:
-            name: name
-            value: Angostura
+  # USER
 
-      - insert:
-        tableName: orders
-        columns:
-          - column:
-            name: status
-            value: 1
-          - column:
-            name: user_id
-            value: 1
-      - insert:
-        tableName: orders
-        columns:
-          - column:
-            name: status
-            value: 0
-          - column:
-            name: user_id
-            value: 2
-      - insert:
-        tableName: orders
-        columns:
-          - column:
-            name: status
-            value: 1
-          - column:
-            name: user_id
-            value: 2
+  - changeSet:
+      id: 4
+      author: tolstiachok123
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: active
+                  type: INT(1)
+                  valueBoolean: true
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 5
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: active
+                  value: 1
+              - column:
+                  name: email
+                  value: sergey_andr1998@mail.ru
+              - column:
+                  name: password
+                  value: $2y$12$B5RBo0y9a6fPRIvnz2c1VOoGApLmbKQllyE7gAw1SGuLNW0tN0NPG
+              - column:
+                  name: phone
+                  value: 2320545
+              - column:
+                  name: username
+                  value: tolstiachok123
+  - changeSet:
+      id: 6
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: active
+                  value: 1
+              - column:
+                  name: email
+                  value: java_nagibator@gmail.com
+              - column:
+                  name: password
+                  value: $2y$12$B5RBo0y9a6fPRIvnz2c1VOoGApLmbKQllyE7gAw1SGuLNW0tN0NPG
+              - column:
+                  name: phone
+                  value: 7788
+              - column:
+                  name: username
+                  value: Roman
+  - changeSet:
+      id: 7
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: active
+                  value: 1
+              - column:
+                  name: email
+                  value: kuramawers@gmail.com
+              - column:
+                  name: password
+                  value: $2a$10$OHGOW.BxeQGYDbsjxd2d1uwixH.ds2gBvF0c57wsupsdDlf/TreCe
+              - column:
+                  name: phone
+                  value: 80299058229
+              - column:
+                  name: username
+                  value: Kurama
+  #
+  # ORDER
+  #
+  - changeSet:
+      id: 8
+      author: tolstiachok123
+      changes:
+        - createTable:
+            tableName: orders
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: status
+                  type: INT(1)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: INT
+                  constraints:
+                    foreignKeyName: orders_user_id_fk
+                    references: user(id)
+                    nullable: false
+  - changeSet:
+      id: 9
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  name: status
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 1
+  - changeSet:
+      id: 10
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  name: status
+                  value: 0
+              - column:
+                  name: user_id
+                  value: 2
+  - changeSet:
+      id: 11
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  name: status
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 2
 
-      - insert:
-        tableName: user
-        columns:
-          - column:
-            name: active
-            value: 1
-          - column:
-            name: email
-            value: sergey_andr1998@mail.ru
-          - column:
-            name: password
-            value: $2y$12$B5RBo0y9a6fPRIvnz2c1VOoGApLmbKQllyE7gAw1SGuLNW0tN0NPG
-          - column:
-            name: phone
-            value: 2320545
-          - column:
-            name: username
-            value: tolstiachok123
-      - insert:
-        tableName: user
-        columns:
-          - column:
-            name: active
-            value: 1
-          - column:
-            name: email
-            value: java_nagibator@gmail.com
-          - column:
-            name: password
-            value: $2y$12$B5RBo0y9a6fPRIvnz2c1VOoGApLmbKQllyE7gAw1SGuLNW0tN0NPG
-          - column:
-            name: phone
-            value: 7788
-          - column:
-            name: username
-            value: Roman
-      - insert:
-        tableName: user
-        columns:
-          - column:
-            name: active
-            value: 1
-          - column:
-            name: email
-            value: kuramawers@gmail.com
-          - column:
-            name: password
-            value: $2a$10$OHGOW.BxeQGYDbsjxd2d1uwixH.ds2gBvF0c57wsupsdDlf/TreCe
-          - column:
-            name: phone
-            value: 80299058229
-          - column:
-            name: username
-            value: Kurama
+  # MANUFACTURER
 
-      - insert:
-        tableName: role
-        columns:
-          - column:
-            name: name
-            value: ADMIN
-      - insert:
-        tableName: role
-        columns:
-          - column:
-            name: name
-            value: USER
-
-      - insert:
-        tableName: user_roles
-        columns:
-          - column:
-            name: user_id
-            value: 1
-          - column:
-            name: roles_id
-            value: 1
-      - insert:
-        tableName: user_roles
-        columns:
-          - column:
-            name: user_id
-            value: 2
-          - column:
-            name: roles_id
-            value: 1
-      - insert:
-        tableName: user_roles
-        columns:
-          - column:
-            name: user_id
-            value: 3
-          - column:
-            name: roles_id
-            value: 1
-
-      - insert:
-        tableName: alcohol_drink_orders
-        columns:
-          - column:
-            name: alcohol_drinks_id
-            value: 1
-          - column:
-            name: orders_id
-            value: 1
-      - insert:
-        tableName: alcohol_drink_orders
-        columns:
-          - column:
-            name: alcohol_drinks_id
-            value: 1
-          - column:
-            name: orders_id
-            value: 2
-      - insert:
-        tableName: alcohol_drink_orders
-        columns:
-          - column:
-            name: alcohol_drinks_id
-            value: 3
-          - column:
-            name: orders_id
-            value: 3
+  - changeSet:
+      id: 12
+      author: tolstiachok123
+      changes:
+        - createTable:
+            tableName: manufacturer
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: link
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: logo_path
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 13
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: manufacturer
+            columns:
+              - column:
+                  name: description
+                  value: Once upon a time, a small, let’s say, determined group had a brilliant but lofty idea where they tried to have their cake and eat it too.
+              - column:
+                  name: link
+                  value: https://www.baileys.com/en/
+              - column:
+                  name: logo_path
+                  value: https://www.baileys.com/images/baileys_logo_01.png
+              - column:
+                  name: name
+                  value: Baileys
+  - changeSet:
+      id: 14
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: manufacturer
+            columns:
+              - column:
+                  name: description
+                  value: In 1860, liquorist Gaspare Campari invented the striking red aperitif the secret recipe still keeps the name of its original creator. Hohenstein, Dudovich, Depero, Cappiello…
+              - column:
+                  name: link
+                  value: https://www.camparigroup.com/en
+              - column:
+                  name: logo_path
+                  value: https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Campari_Group.svg/190px-Campari_Group.svg.png
+              - column:
+                  name: name
+                  value: Campari Group
+  - changeSet:
+      id: 15
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: manufacturer
+            columns:
+              - column:
+                  name: description
+                  value: Завод «Абрау-Дюрсо» ведёт историю от даты указа императора Александра II — 25 ноября 1870 года у озера Абрау и реки Дюрсо было создано удельное имение «Абрау-Дюрсо», которое стало принадлежать царской семье.
+              - column:
+                  name: link
+                  value: https://www.abraudurso.ru/
+              - column:
+                  name: logo_path
+                  value: https://www.google.de/url?sa=i&url=https%3A%2F%2Ftoplogos.ru%2Flogo-abrau-dyurso%2F&psig=AOvVaw3-uv7EYznx4fZDZ0kkstxc&ust=1596391093458000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMDcurLK-uoCFQAAAAAdAAAAABAD
+              - column:
+                  name: name
+                  value: Абрау-Дюрсо
+  - changeSet:
+      id: 16
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: manufacturer
+            columns:
+              - column:
+                  name: description
+                  value: Angostura is one of the Caribbean’s leading rum producers with a superb collection of rum brands and is the world’s market leader for bitters.
+              - column:
+                  name: link
+                  value: http://www.angostura.com/
+              - column:
+                  name: logo_path
+                  value: https://www.google.de/url?sa=i&url=https%3A%2F%2Fwww.artisan-spirits.co.uk%2Fbrands%2Fattachment%2Fangostura-aromatic-bitters-2%2F&psig=AOvVaw3WD4IjQqRPXVnfMNiMVHsM&ust=1596391211796000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOCgwvHK-uoCFQAAAAAdAAAAABAD
+              - column:
+                  name: name
+                  value: Angostura
+  #
+  #  # ALCOHOLDRINK
+  #
+  - changeSet:
+      id: 17
+      author: tolstiachok123
+      changes:
+        - createTable:
+            tableName: alcohol_drink
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: adv
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cost
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: photo_path
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: quantity
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: manufacturer_id
+                  type: INT
+                  constraints:
+                    foreignKeyName: alcohol_drink_manufacturer_id_fk
+                    references: manufacturer(id)
+                    nullable: false
+  - changeSet:
+      id: 18
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: alcohol_drink
+            columns:
+              - column:
+                  name: adv
+                  value: 17
+              - column:
+                  name: cost
+                  value: 35
+              - column:
+                  name: name
+                  value: Baileys
+              - column:
+                  name: photo_path
+                  value: https://dydza6t6xitx6.cloudfront.net/ci-baileys-irish-cream-original-d59754a2faf3570f.jpeg
+              - column:
+                  name: quantity
+                  value: 10
+              - column:
+                  name: type
+                  value: LIQUEUR
+              - column:
+                  name: manufacturer_id
+                  value: 1
+  - changeSet:
+      id: 19
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: alcohol_drink
+            columns:
+              - column:
+                  name: adv
+                  value: 45
+              - column:
+                  name: cost
+                  value: 30
+              - column:
+                  name: name
+                  value: Angostura
+              - column:
+                  name: photo_path
+                  value: https://cdn.diffords.com/contrib/bws/2019/03/5c878a9d41f45.jpg
+              - column:
+                  name: quantity
+                  value: 3
+              - column:
+                  name: type
+                  value: BITTER
+              - column:
+                  name: manufacturer_id
+                  value: 4
+  - changeSet:
+      id: 20
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: alcohol_drink
+            columns:
+              - column:
+                  name: adv
+                  value: 12
+              - column:
+                  name: cost
+                  value: 7
+              - column:
+                  name: name
+                  value: Абрау-Дюрсо
+              - column:
+                  name: photo_path
+                  value: https://s.winestyle.ru/images_gen/907/90718/0_0_orig.jpg
+              - column:
+                  name: quantity
+                  value: 33
+              - column:
+                  name: type
+                  value: VINE
+              - column:
+                  name: manufacturer_id
+                  value: 3
+  #
+  #  # USER-ROLE
+  #
+  - changeSet:
+      id: 21
+      author: tolstiachok123
+      changes:
+        - createTable:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  type: INT
+                  constraints:
+                    foreignKeyName: user_roles_user_id_fk
+                    references: user(id)
+                    nullable: false
+              - column:
+                  name: roles_id
+                  type: INT
+                  constraints:
+                    foreignKeyName: user_roles_role_id_fk
+                    references: role(id)
+                    nullable: false
+  - changeSet:
+      id: 22
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: roles_id
+                  value: 1
+  - changeSet:
+      id: 23
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: roles_id
+                  value: 1
+  - changeSet:
+      id: 24
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: roles_id
+                  value: 1
+  #
+  #  # ALCOHOLDRINK-ORDER
+  #
+  - changeSet:
+      id: 25
+      author: tolstiachok123
+      changes:
+        - createTable:
+            tableName: alcohol_drink_orders
+            columns:
+              - column:
+                  name: alcohol_drinks_id
+                  type: INT
+                  constraints:
+                    foreignKeyName: alcohol_drink_orders_alcohol_drink_id_fk
+                    references: alcohol_drink(id)
+                    nullable: false
+              - column:
+                  name: orders_id
+                  type: INT
+                  constraints:
+                    foreignKeyName: alcohol_drink_orders_orders_id_fk
+                    references: orders(id)
+                    nullable: false
+  - changeSet:
+      id: 26
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: alcohol_drink_orders
+            columns:
+              - column:
+                  name: alcohol_drinks_id
+                  value: 1
+              - column:
+                  name: orders_id
+                  value: 1
+  - changeSet:
+      id: 27
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: alcohol_drink_orders
+            columns:
+              - column:
+                  name: alcohol_drinks_id
+                  value: 1
+              - column:
+                  name: orders_id
+                  value: 2
+  - changeSet:
+      id: 28
+      author: tolstiachok123
+      changes:
+        - insert:
+            tableName: alcohol_drink_orders
+            columns:
+              - column:
+                  name: alcohol_drinks_id
+                  value: 3
+              - column:
+                  name: orders_id
+                  value: 3
 
 
