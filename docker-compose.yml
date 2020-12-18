@@ -25,7 +25,7 @@ services:
     #      test: db
     restart: on-failure
     ports:
-      - 8085:8085
+      - 8084:8084
     environment:
       - DATABASE_USER=root
       - DATABASE_PASSWORD=9109
@@ -34,6 +34,7 @@ services:
 networks:
   spring-boot-rest-mysql-network:
     driver: bridge
+
 
 
 
