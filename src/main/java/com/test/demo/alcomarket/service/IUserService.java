@@ -16,4 +16,7 @@ public interface IUserService {
     public void add(User user);
 
     public User getCurrent();
+
+    public User getByUsername(String username);
+
 }

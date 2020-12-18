@@ -51,9 +51,15 @@ public class UserServiceImpl implements IUserService {
         iUserRepository.save(user);
     }
 
+    @Override
     public User getCurrent() {
         Integer userId = ((CustomPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         return iUserRepository.getOne(userId);
+    }
+
+    @Override
+    public User getByUsername(String username) {
+        return iUserRepository.findByUsername(username);
     }
 
 }
