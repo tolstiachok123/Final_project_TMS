@@ -2,9 +2,11 @@ package com.test.demo.alcomarket.security;
 
 import com.test.demo.alcomarket.model.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class CustomPrincipal implements UserDetails {
 
@@ -16,8 +18,7 @@ public class CustomPrincipal implements UserDetails {
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        return null;
-        // return user.getRoles().stream().map(it -> new SimpleGrantedAuthority(it.getName().name())).collect(Collectors.toList());
+      return user.getRoles().stream().map(it -> new SimpleGrantedAuthority(it.getName().name())).collect(Collectors.toList());
     }
 
     @Override
@@ -53,4 +54,5 @@ public class CustomPrincipal implements UserDetails {
     public Integer getId() {
         return user.getId();
     }
+
 }

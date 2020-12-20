@@ -1,7 +1,5 @@
 package com.test.demo.alcomarket.security;
 
-import com.test.demo.alcomarket.security.provider.AppAuthenticationProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
@@ -15,19 +13,23 @@ import java.io.IOException;
 
 public class JwtTokenFilter extends GenericFilterBean {
 
-    @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    @Autowired
-    private AppAuthenticationProvider authenticationProvider;
+    public JwtTokenFilter(JwtTokenProvider jwtTokenProvider) {
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
+
+//
+//    @Autowired
+//    private AppAuthenticationProvider authenticationProvider;
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain)
-            throws IOException, ServletException {
+        throws IOException, ServletException {
 
         String token = jwtTokenProvider.resolveToken((HttpServletRequest) req);
         if (token != null && jwtTokenProvider.validateToken(token)) {
-            Authentication auth = authenticationProvider.getAuthentication(token, jwtTokenProvider.getSecretKey());
+            Authentication auth = jwtTokenProvider.getAuthentication(token);
 
             if (auth != null) {
                 SecurityContextHolder.getContext().setAuthentication(auth);
@@ -35,4 +37,5 @@ public class JwtTokenFilter extends GenericFilterBean {
         }
         filterChain.doFilter(req, res);
     }
+
 }

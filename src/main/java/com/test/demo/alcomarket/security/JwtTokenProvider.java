@@ -4,7 +4,12 @@ import com.test.demo.alcomarket.model.Role;
 import io.jsonwebtoken.*;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -18,19 +23,20 @@ import java.util.List;
 @Component
 public class JwtTokenProvider {
 
-    @Getter
-    @Value("springMyLove")
-    private String secretKey;
+  @Getter
+  @Value("springMyLove")
+  private String secretKey;
+  @Qualifier("appUserDetailsService")
+  @Autowired
+  private UserDetailsService userDetailsService;
+  @Value("3600000")
+  private long validityInMilliseconds;
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
-    @Value("3600000")
-    private long validityInMilliseconds;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @PostConstruct
-    protected void init() {
-        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+  @PostConstruct
+  protected void init() {
+    secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
     public String createToken(String username, List<Role> roles) {
@@ -73,11 +79,21 @@ public class JwtTokenProvider {
         }
     }
 
-    public String resolveToken(HttpServletRequest req) {
-        String bearerToken = req.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer_")) {
-            return bearerToken.substring(7, bearerToken.length());
-        }
-        return null;
+  public String resolveToken(HttpServletRequest req) {
+    String bearerToken = req.getHeader("Authorization");
+    if (bearerToken != null && bearerToken.startsWith("Bearer_")) {
+      return bearerToken.substring(7, bearerToken.length());
     }
+    return null;
+  }
+
+  public Authentication getAuthentication(String token) {
+    UserDetails userDetails = this.userDetailsService.loadUserByUsername(getUsername(token));
+    return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+  }
+
+  public String getUsername(String token) {
+    return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+  }
+
 }
