@@ -20,7 +20,7 @@ public class JwtUserDetailsService implements UserDetailsService {
       throw new UsernameNotFoundException("User with username: " + username + " not found");
     }
 
-    CustomPrincipal customPrincipal = new CustomPrincipal(user);
+    CustomPrincipal customPrincipal = CustomPrincipalFactory.create(user);
     return customPrincipal;
   }
 

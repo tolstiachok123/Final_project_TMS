@@ -3,6 +3,7 @@ package com.test.demo.alcomarket.security.service;
 import com.test.demo.alcomarket.model.User;
 import com.test.demo.alcomarket.repository.IUserRepository;
 import com.test.demo.alcomarket.security.CustomPrincipal;
+import com.test.demo.alcomarket.security.CustomPrincipalFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +19,8 @@ public class AppUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = IUserRepository.findByUsername(username);
-        return new CustomPrincipal(user);
+        CustomPrincipal customPrincipal = CustomPrincipalFactory.create(user);
+        return customPrincipal;
     }
+
 }

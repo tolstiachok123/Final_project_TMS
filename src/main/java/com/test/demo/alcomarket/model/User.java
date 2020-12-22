@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Builder
@@ -14,28 +17,29 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    @Id
+
+  @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-    @Column
+  @Column
     private String username;
-
-    @Column
+  @Column
     private String email;
+  @Column
+  private String phone;
+  @Column
+  private String password;
+  @Column
+  private boolean active;
+  @CreatedDate
+  @Column
+  private Date created;
+  @LastModifiedDate
+  @Column
+  private Date updated;
+  @ManyToMany(fetch = FetchType.LAZY)
+  private List<Role> roles;
+  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+  private List<Order> orders;
 
-    @Column
-    private String phone;
-
-    @Column
-    private String password;
-
-    @Column
-    private boolean active;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Role> roles;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Order> orders;
 }

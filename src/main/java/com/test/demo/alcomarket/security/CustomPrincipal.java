@@ -1,58 +1,74 @@
 package com.test.demo.alcomarket.security;
 
-import com.test.demo.alcomarket.model.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.Date;
 
 public class CustomPrincipal implements UserDetails {
 
-    private User user;
+    private boolean active;
+    private Collection<? extends GrantedAuthority> authorities;
+    private String email;
+    private Integer id;
+    private Date lastPasswordResetDate;
+    private String password;
+    private String phone;
+    private String username;
 
-    public CustomPrincipal(User user) {
-        this.user = user;
+    public CustomPrincipal(Integer id, String username, String email, String phone, String password, boolean active, Date lastPasswordResetDate, Collection<? extends GrantedAuthority> authorities) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.active = active;
+        this.lastPasswordResetDate = lastPasswordResetDate;
+        this.authorities = authorities;
     }
 
     @Override
-    public Collection<GrantedAuthority> getAuthorities() {
-      return user.getRoles().stream().map(it -> new SimpleGrantedAuthority(it.getName().name())).collect(Collectors.toList());
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return user.isActive();
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return user.isActive();
+        return active;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return user.isActive();
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return user.isActive();
+        return active;
     }
 
     public Integer getId() {
-        return user.getId();
+        return id;
+    }
+
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
     }
 
 }

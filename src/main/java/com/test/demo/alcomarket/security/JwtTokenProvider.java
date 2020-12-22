@@ -10,7 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -31,18 +30,19 @@ public class JwtTokenProvider {
   private UserDetailsService userDetailsService;
   @Value("3600000")
   private long validityInMilliseconds;
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+
+//  @Autowired
+//  private PasswordEncoder passwordEncoder;
 
   @PostConstruct
   protected void init() {
     secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
-    }
+  }
 
-    public String createToken(String username, List<Role> roles) {
+  public String createToken(String username, List<Role> roles) {
 
-        Claims claims = Jwts.claims().setSubject(username);
-        claims.put("roles", this.getRoleNames(roles));
+    Claims claims = Jwts.claims().setSubject(username);
+    claims.put("roles", this.getRoleNames(roles));
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
