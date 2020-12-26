@@ -13,13 +13,13 @@ public final class CustomPrincipalFactory {
 
   public static CustomPrincipal create(User user) {
     return new CustomPrincipal(
-        user.getId(),
-        user.getUsername(),
         user.getEmail(),
+        user.getId(),
+        user.getUpdated(),
         user.getPhone(),
         user.getPassword(),
         user.isActive(),
-        user.getUpdated(),
+        user.getUsername(),
         mapToGrantedAuthorities(new ArrayList<>(user.getRoles()))
     );
   }
