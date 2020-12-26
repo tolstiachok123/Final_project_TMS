@@ -1,32 +1,36 @@
 package com.test.demo.alcomarket.security;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Date;
 
+@AllArgsConstructor
+@Data
 public class CustomPrincipal implements UserDetails {
 
-    private boolean active;
-    private Collection<? extends GrantedAuthority> authorities;
     private String email;
     private Integer id;
     private Date lastPasswordResetDate;
     private String password;
     private String phone;
+    private boolean active;
     private String username;
+    private Collection<? extends GrantedAuthority> authorities;
 
-    public CustomPrincipal(Integer id, String username, String email, String phone, String password, boolean active, Date lastPasswordResetDate, Collection<? extends GrantedAuthority> authorities) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.phone = phone;
-        this.password = password;
-        this.active = active;
-        this.lastPasswordResetDate = lastPasswordResetDate;
-        this.authorities = authorities;
-    }
+//    public CustomPrincipal(Integer id, String username, String email, String phone, String password, boolean active, Date lastPasswordResetDate, Collection<? extends GrantedAuthority> authorities) {
+//        this.id = id;
+//        this.username = username;
+//        this.email = email;
+//        this.phone = phone;
+//        this.password = password;
+//        this.active = active;
+//        this.lastPasswordResetDate = lastPasswordResetDate;
+//        this.authorities = authorities;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -63,12 +67,13 @@ public class CustomPrincipal implements UserDetails {
         return active;
     }
 
-    public Integer getId() {
-        return id;
-    }
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public Date getLastPasswordResetDate() {
+//        return lastPasswordResetDate;
+//    }
 
-    public Date getLastPasswordResetDate() {
-        return lastPasswordResetDate;
-    }
 
 }

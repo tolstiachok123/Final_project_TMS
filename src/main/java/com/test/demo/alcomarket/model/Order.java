@@ -34,7 +34,6 @@ public class Order {
                 "id=" + id +
                 ", status=" + status +
                 ", alcoholDrinks=" + alcoholDrinks +
-                ", user=" + user +
                 '}';
     }
 }

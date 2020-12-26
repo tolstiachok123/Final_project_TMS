@@ -4,12 +4,10 @@ import com.test.demo.alcomarket.model.Role;
 import io.jsonwebtoken.*;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -25,9 +23,8 @@ public class JwtTokenProvider {
   @Getter
   @Value("springMyLove")
   private String secretKey;
-  @Qualifier("appUserDetailsService")
   @Autowired
-  private UserDetailsService userDetailsService;
+  private JwtUserDetailsService userDetailsService;
   @Value("3600000")
   private long validityInMilliseconds;
 
@@ -45,46 +42,46 @@ public class JwtTokenProvider {
     claims.put("roles", this.getRoleNames(roles));
 
         Date now = new Date();
-        Date validity = new Date(now.getTime() + validityInMilliseconds);
+    Date validity = new Date(now.getTime() + validityInMilliseconds);
 
-        return Jwts.builder()//
-                .setClaims(claims)//
-                .setIssuedAt(now)//
-                .setExpiration(validity)//
-                .signWith(SignatureAlgorithm.HS256, secretKey)//
-                .compact();
-    }
-
-    private List<String> getRoleNames(List<Role> userRoles) {
-        List<String> rolesStringFormat = new ArrayList<>();
-
-        userRoles.forEach(role -> {
-            rolesStringFormat.add(role.getName().name());
-        });
-
-        return rolesStringFormat;
-    }
-
-    public boolean validateToken(String token) {
-        try {
-            Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
-
-            if (claims.getBody().getExpiration().before(new Date())) {
-                return false;
-            }
-
-            return true;
-        } catch (JwtException | IllegalArgumentException e) {
-            throw new JwtAuthenticationException("JWT token is expired or invalid");
-        }
-    }
+    return Jwts.builder()//
+        .setClaims(claims)//
+        .setIssuedAt(now)//
+        .setExpiration(validity)//
+        .signWith(SignatureAlgorithm.HS256, secretKey)//
+        .compact();
+  }
 
   public String resolveToken(HttpServletRequest req) {
     String bearerToken = req.getHeader("Authorization");
-    if (bearerToken != null && bearerToken.startsWith("Bearer_")) {
+    if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
       return bearerToken.substring(7, bearerToken.length());
     }
     return null;
+  }
+
+  public boolean validateToken(String token) {
+    try {
+      Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+
+      if (claims.getBody().getExpiration().before(new Date())) {
+        return false;
+      }
+
+      return true;
+    } catch (JwtException | IllegalArgumentException e) {
+      throw e;
+    }
+  }
+
+  private List<String> getRoleNames(List<Role> userRoles) {
+    List<String> rolesStringFormat = new ArrayList<>();
+
+    userRoles.forEach(role -> {
+      rolesStringFormat.add(role.getName().name());
+    });
+
+    return rolesStringFormat;
   }
 
   public Authentication getAuthentication(String token) {
