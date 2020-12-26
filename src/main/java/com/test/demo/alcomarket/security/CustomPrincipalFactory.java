@@ -16,8 +16,8 @@ public final class CustomPrincipalFactory {
         user.getEmail(),
         user.getId(),
         user.getUpdated(),
-        user.getPhone(),
         user.getPassword(),
+        user.getPhone(),
         user.isActive(),
         user.getUsername(),
         mapToGrantedAuthorities(new ArrayList<>(user.getRoles()))

@@ -1,7 +1,6 @@
 package com.test.demo.alcomarket.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,20 +10,20 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Builder
+//@Builder
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
 
+  @Column
+  private String email;
   @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer id;
   @Column
-    private String username;
-  @Column
-    private String email;
+  private String username;
   @Column
   private String phone;
   @Column

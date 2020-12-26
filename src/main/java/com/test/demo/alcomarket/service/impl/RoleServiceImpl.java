@@ -27,6 +27,7 @@ public class RoleServiceImpl implements IRoleService {
 
     @Override
     public Role getDefaultRole() {
-        return IRoleRepository.findByName();
+        return IRoleRepository.findByName("USER");
     }
+
 }
