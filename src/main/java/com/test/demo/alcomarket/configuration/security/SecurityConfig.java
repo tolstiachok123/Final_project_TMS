@@ -46,18 +46,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .httpBasic().disable()
 //                .addFilterBefore(myCorsFilter(), WebAsyncManagerIntegrationFilter.class)
             .csrf().disable()
+            .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //guarantee that the application will not create any session at all
             .and()
             .authorizeRequests()
             .antMatchers("/drinks/**", "/manufacturers/**", "/registration", "/login").permitAll()
-            .antMatchers("/order/current/**", "/user").hasRole("USER")
-            .antMatchers("/admin", "/order/{id}", "/users/**").hasRole("ADMIN")
+            .antMatchers("/order/current", "/user").hasAuthority("USER")
+            .antMatchers("/order/*", "/users").hasAuthority("ADMIN")
             .anyRequest().authenticated()
             .and()
 //                .exceptionHandling().accessDeniedHandler(securityHandler)
 //                .and()
             .apply(new JwtConfigurer(jwtTokenProvider));
-        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
 }
