@@ -3,6 +3,7 @@ package com.test.demo.alcomarket.service.impl;
 import com.test.demo.alcomarket.dto.UserDto;
 import com.test.demo.alcomarket.mapper.UserMapper;
 import com.test.demo.alcomarket.model.Role;
+import com.test.demo.alcomarket.model.RoleName;
 import com.test.demo.alcomarket.model.User;
 import com.test.demo.alcomarket.repository.IUserRepository;
 import com.test.demo.alcomarket.security.CustomPrincipal;
@@ -54,7 +55,9 @@ public class UserServiceImpl implements IUserService {
     public void add(User user) {
         user.setActive(true);
         List<Role> roles = new ArrayList<Role>();
-        roles.add(iRoleService.getDefaultRole());
+        Role defaultRole = new Role();
+        defaultRole.setName(RoleName.USER);
+        roles.add(defaultRole);
         user.setRoles(roles);
         iUserRepository.save(user);
     }
