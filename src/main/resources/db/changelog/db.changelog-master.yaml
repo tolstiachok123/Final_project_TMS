@@ -150,6 +150,17 @@ databaseChangeLog:
               - column:
                   name: username
                   value: Kurama
+
+  - changeSet:
+      id: 29
+      author: tolstiachok123
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: username
+            indexName: idx_username
+            tableName: user
   #
   # ORDER
   #
@@ -331,6 +342,16 @@ databaseChangeLog:
               - column:
                   name: name
                   value: Angostura
+  - changeSet:
+      id: 30
+      author: tolstiachok123
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: name
+            indexName: idx_name
+            tableName: manufacturer
   #
   #  # ALCOHOLDRINK
   #
@@ -469,6 +490,16 @@ databaseChangeLog:
               - column:
                   name: manufacturer_id
                   value: 3
+  - changeSet:
+      id: 31
+      author: tolstiachok123
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: name
+            indexName: idx_name
+            tableName: alcohol_drink
   #
   #  # USER-ROLE
   #
