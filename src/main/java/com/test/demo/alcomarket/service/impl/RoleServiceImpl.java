@@ -1,7 +1,6 @@
 package com.test.demo.alcomarket.service.impl;
 
 import com.test.demo.alcomarket.model.Role;
-import com.test.demo.alcomarket.model.RoleName;
 import com.test.demo.alcomarket.repository.IRoleRepository;
 import com.test.demo.alcomarket.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +27,8 @@ public class RoleServiceImpl implements IRoleService {
 
     @Override
     public Role getDefaultRole() {
-        Role defaultRole = IRoleRepository.findByName(RoleName.USER.name());
-        return defaultRole;
+        Integer userId = 2;
+        return IRoleRepository.getOne(userId);
     }
 
 }

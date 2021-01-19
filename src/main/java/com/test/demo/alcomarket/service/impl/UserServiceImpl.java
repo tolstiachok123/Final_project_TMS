@@ -3,7 +3,6 @@ package com.test.demo.alcomarket.service.impl;
 import com.test.demo.alcomarket.dto.UserDto;
 import com.test.demo.alcomarket.mapper.UserMapper;
 import com.test.demo.alcomarket.model.Role;
-import com.test.demo.alcomarket.model.RoleName;
 import com.test.demo.alcomarket.model.User;
 import com.test.demo.alcomarket.repository.IUserRepository;
 import com.test.demo.alcomarket.security.CustomPrincipal;
@@ -11,25 +10,29 @@ import com.test.demo.alcomarket.service.IRoleService;
 import com.test.demo.alcomarket.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
 @Transactional
 public class UserServiceImpl implements IUserService {
 
-    private IUserRepository iUserRepository;
+    private final IUserRepository iUserRepository;
+    private final PasswordEncoder passwordEncoder;
     private IRoleService iRoleService;
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
     @Autowired
-    UserServiceImpl(IUserRepository IUserRepository, UserMapper userMapper, IRoleService iRoleService) {
+    UserServiceImpl(IUserRepository IUserRepository, UserMapper userMapper, IRoleService iRoleService, PasswordEncoder passwordEncoder) {
         this.iUserRepository = IUserRepository;
         this.userMapper = userMapper;
         this.iRoleService = iRoleService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -53,12 +56,13 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void add(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(true);
         List<Role> roles = new ArrayList<Role>();
-        Role defaultRole = new Role();
-        defaultRole.setName(RoleName.USER);
-        roles.add(defaultRole);
+        roles.add(iRoleService.getDefaultRole());
         user.setRoles(roles);
+        user.setCreated(new Date());
+        user.setUpdated(new Date());
         iUserRepository.save(user);
     }
 
