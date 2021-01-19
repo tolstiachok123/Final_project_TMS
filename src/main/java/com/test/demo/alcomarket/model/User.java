@@ -36,9 +36,9 @@ public class User {
   @LastModifiedDate
   @Column
   private Date updated;
-  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-  private List<Role> roles;
-  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
   private List<Order> orders;
+  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+  private List<Role> roles;
 
 }

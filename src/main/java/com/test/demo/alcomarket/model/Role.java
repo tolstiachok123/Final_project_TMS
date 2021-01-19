@@ -20,6 +20,6 @@ public class Role {
     @Enumerated(EnumType.STRING)
     private RoleName name;
 //
-//    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+//    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private List<User> users;
 }
