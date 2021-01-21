@@ -39,6 +39,7 @@ public class UserServiceImpl implements IUserService {
     public List<UserDto> getAllUsers() {
         List<UserDto> userDtos = new ArrayList<>();
         for (User user : iUserRepository.findAll()) {
+            user.setPassword("secret");
             userDtos.add(userMapper.objectToDto(user));
         }
         return userDtos;
@@ -46,7 +47,9 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserDto getOne(Integer id) {
-        return userMapper.objectToDto(iUserRepository.getOne(id));
+        UserDto userDto = userMapper.objectToDto(iUserRepository.getOne(id));
+        userDto.setPassword("secret");
+        return userDto;
     }
 
     @Override
