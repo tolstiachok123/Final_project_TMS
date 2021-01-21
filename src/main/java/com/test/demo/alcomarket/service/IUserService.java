@@ -19,4 +19,6 @@ public interface IUserService {
 
     public User getByUsername(String username);
 
+    public UserDto hidePassword(UserDto userDto);
+
 }

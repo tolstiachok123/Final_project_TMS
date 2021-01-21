@@ -48,6 +48,11 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserDto getOne(Integer id) {
         UserDto userDto = userMapper.objectToDto(iUserRepository.getOne(id));
+        return userDto;
+    }
+
+    @Override
+    public UserDto hidePassword(UserDto userDto) {
         userDto.setPassword("secret");
         return userDto;
     }

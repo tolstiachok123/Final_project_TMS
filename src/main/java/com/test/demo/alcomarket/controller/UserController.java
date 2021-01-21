@@ -39,7 +39,8 @@ public class UserController {
 
     @GetMapping(value = "/user")
     public UserDto showThisUserInfo() {
-        return userService.getOne(((CustomPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        UserDto userDto = userService.getOne(((CustomPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+        return userService.hidePassword(userDto);
     }
 
     @PostMapping(value = "/registration")
