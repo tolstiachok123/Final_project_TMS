@@ -16,5 +16,6 @@ public class AlcoholDrinkDto {
     private String name;
     private double cost;
     private double adv;
+  private String manufacturerName;
 
 }

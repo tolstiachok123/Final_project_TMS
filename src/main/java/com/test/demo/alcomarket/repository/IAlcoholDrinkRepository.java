@@ -8,4 +8,7 @@ public interface IAlcoholDrinkRepository extends JpaRepository<AlcoholDrink, Int
 
     @Query("from AlcoholDrink where name =:name")
     AlcoholDrink findByName(String name);
+//
+//    @Query("INSERT INTO ")
+//    void save(AlcoholDrink alcoholDrink);
 }

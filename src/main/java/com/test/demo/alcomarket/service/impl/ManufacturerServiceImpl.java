@@ -47,13 +47,18 @@ public class ManufacturerServiceImpl implements IManufacturerService {
         manufacturerRepository.save(manufacturer);
     }
 
-    @Override
-    public void addNew(Manufacturer manufacturer) {
-        manufacturerRepository.save(manufacturer);
-    }
+  @Override
+  public void addNew(Manufacturer manufacturer) {
+    manufacturerRepository.save(manufacturer);
+  }
 
-    @Override
-    public void deleteById(Integer id) {
-        manufacturerRepository.deleteById(id);
-    }
+  @Override
+  public void deleteById(Integer id) {
+    manufacturerRepository.deleteById(id);
+  }
+
+  @Override
+  public Manufacturer getByName(String manufacturerName) {
+    return manufacturerRepository.findByName(manufacturerName);
+  }
 }

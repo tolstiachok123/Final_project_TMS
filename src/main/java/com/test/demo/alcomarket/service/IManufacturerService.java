@@ -7,14 +7,16 @@ import java.util.List;
 
 public interface IManufacturerService {
 
-    public List<ManufacturerDto> getAll();
+  public List<ManufacturerDto> getAll();
 
-    public Manufacturer getById(Integer id);
+  public Manufacturer getById(Integer id);
 
-    public void update(Integer id, Manufacturer manufacturer);
+  public void update(Integer id, Manufacturer manufacturer);
 
-    public void addNew(Manufacturer manufacturer);
+  public void addNew(Manufacturer manufacturer);
 
-    public void deleteById(Integer Id);
+  public void deleteById(Integer Id);
+
+  public Manufacturer getByName(String name);
 
 }
