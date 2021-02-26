@@ -41,6 +41,9 @@ public class UserServiceImpl implements IUserService {
         for (User user : iUserRepository.findAll()) {
             userDtos.add(userMapper.objectToDto(user));
         }
+        for (UserDto userDto : userDtos) {
+            userDto.setPassword("secret");
+        }
         return userDtos;
     }
 
