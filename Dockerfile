@@ -1,4 +1,4 @@
-FROM maven:3.6.3-openjdk-16
+FROM maven:3.6.3-openjdk-15
 LABEL author = "Sergey Andruhovich sergeyandr1998@gmail.com"
 WORKDIR /app
 COPY src /app/src
