@@ -50,14 +50,14 @@ public class AdminController {
         userService.deleteById(id);
     }
 
-    @PostMapping(value = "/drinks")
+    @PutMapping(value = "/drinks")
     public void addNew(@RequestBody AlcoholDrinkDto alcoholDrinkDto) {
         alcoholDrinkService.addNew(alcoholDrinkMapper.dtoToObject(alcoholDrinkDto));
     }
 
-    @PutMapping(value = "/drinks/{id}")
-    public void updateById(@PathVariable(name = "id") Integer id, @RequestBody AlcoholDrinkDto alcoholDrinkDto) {
-        alcoholDrinkService.update(id, alcoholDrinkMapper.dtoToObject(alcoholDrinkDto));
+    @PutMapping(value = "/manufacturer")
+    public void addNew(@RequestBody ManufacturerDto manufacturerDto) {
+        manufacturerService.addNew(manufacturerMapper.dtoToObject(manufacturerDto));
     }
 
     @DeleteMapping(value = "/drinks/{id}")
@@ -65,12 +65,12 @@ public class AdminController {
         alcoholDrinkService.deleteById(id);
     }
 
-    @PostMapping(value = "/manufacturer")
-    public void addNew(@RequestBody ManufacturerDto manufacturerDto) {
-        manufacturerService.addNew(manufacturerMapper.dtoToObject(manufacturerDto));
+    @PostMapping(value = "/drinks/{id}")
+    public void updateById(@PathVariable(name = "id") Integer id, @RequestBody AlcoholDrinkDto alcoholDrinkDto) {
+        alcoholDrinkService.update(id, alcoholDrinkMapper.dtoToObject(alcoholDrinkDto));
     }
 
-    @PutMapping(value = "/manufacturers/{id}")
+    @PostMapping(value = "/manufacturers/{id}")
     public void updateById(@PathVariable(name = "id") Integer id, @RequestBody ManufacturerDto manufacturerDto) {
         manufacturerService.update(id, manufacturerMapper.dtoToObject(manufacturerDto));
     }
