@@ -19,7 +19,7 @@ docker run tolstiachok123/tms_final_project:v2.0
 Для клонирования репозитория выберите директорию на ПК и перейдите в неё. Запустите Git Bash [ссылка на скачивание Git Bash]{https://git-scm.com/downloads} и введите следующую команду:
 git clone https://github.com/tolstiachok123/Final_project_TMS.git
 
-Запустите Intellij IDEA [ссылка на скачивание Intellij IDEA]{https://www.jetbrains.com/ru-ru/idea/} и откройте загруженый проект. 
+Запустите Intellij IDEA [ссылка на скачивание Intellij IDEA]{https://www.jetbrains.com/ru-ru/idea/} и откройте загруженный проект. 
 
 В проекте используется база данных MySQL [ссылка на скачивание MySQL]{https://dev.mysql.com/downloads/}. Запустите MySQL Workbench, создайте пустую базу данных с именем alcoholmarket [пример создания новой БД]{https://streletzcoder.ru/mysql-workbench-sozdanie-bazyi-dannyih/}. Далее нажмите Server -> Data Import -> Import from Dump Project Folder. В облисти ввода рядом введите полный путь папки "src/main/resources/dump" из дерева проекта. Всё ещё в окне MySQL Workbench перейдите во вкладку Import Progress и нажмите кнопку Start Import. Поздравляю, база данных для работы с проектом создана.
 
@@ -32,14 +32,14 @@ git clone https://github.com/tolstiachok123/Final_project_TMS.git
 
 Настройте соединение с базой данных используя следующую инструкцию [ссылка на подключение MySQL БД к Intellij IDEA]{https://javastudy.ru/webapp/create-mysql-connect-intellij-idea/}. 
 
-Нажмите сочитание клавиш "Shift+F10".
+Нажмите сочетание клавиш "Shift+F10".
 
 ## Использование
 
 После успешного запуска можно перейти в браузер, набрать в поисковой строке "http://localhost:8085" и начать работу с API, но есть варианты удобнее. Рекомендую использовать Postman [ссылка на скачивание Postman]{https://www.postman.com/downloads/}. 
 
 Конечные точки для USER и ADMIN:
-1. localhost:8085/registration (POST) - регистрация нового пользователя
+1. localhost:8085/registration (PUT) - регистрация нового пользователя
 2. localhost:8085/login (POST) - авторизация пользователя
 3. localhost:8085/drinks (GET) - список всех алкогольных напитков
 4. localhost:8085/drinks/{id} (GET) - информация о конкретном алкогольном напитке
@@ -48,23 +48,23 @@ git clone https://github.com/tolstiachok123/Final_project_TMS.git
 7. localhost:8085/manufacturers/{id} (GET) - информация о конкретном производителе
 8. localhost:8085/order/current (GET) - текущий заказ (пустой если Вы ничего не заказывали)
 9. localhost:8085/order/{id} (GET) - информация о конкретном заказе
-10. localhost:8085/order/current/pay (POST) - оплата и завершение текущего заказа
-11. localhost:8085/user (GET) - информация о текущем пользователе (Вас)
+10. localhost:8085/order/current/pay (GET) - оплата и завершение текущего заказа
+11. localhost:8085/user (GET) - информация о текущем пользователе (о Вас)
 
 Конечные точки только для ADMIN:
 1. localhost:8085/users (GET) - список всех пользователей
 2. localhost:8085/users/{id} (GET) - информация о конкретном пользователе
 3. localhost:8085/users/{id} (DELETE) - удаление пользователя
-4. localhost:8085/drinks (POST) - добавление нового алкогольного напитка
-5. localhost:8085/drinks/{id} (PUT) - изменение конкретного алкогольного напитка
+4. localhost:8085/drinks (PUT) - добавление нового алкогольного напитка
+5. localhost:8085/drinks/{id} (POST) - изменение конкретного алкогольного напитка
 6. localhost:8085/drinks/{id} (DELETE) - удаление алкогольного напитка
-7. localhost:8085/manufacturer (POST) - добавление нового производителя
-8. localhost:8085/manufacturers/{id} (PUT) - изменение конкретного производителя
+7. localhost:8085/manufacturer (PUT) - добавление нового производителя
+8. localhost:8085/manufacturers/{id} (POST) - изменение конкретного производителя
 9. localhost:8085/manufacturers/{id} (DELETE) - удаление производителя
 10. localhost:8085/order/{id} (DELETE) - удаление заказа
 
 Запустите Postman. 
-Создайте вкладку с POST-запросом по адресу "localhost:8085/registration", выберите Body -> raw -> JSON и заполните все пары своими данными:
+Создайте вкладку с PUT-запросом по адресу "localhost:8085/registration", выберите Body -> raw -> JSON и заполните все пары своими данными:
 {
     "username": "Username",
     "email": "user@gmail.com",
@@ -77,7 +77,7 @@ git clone https://github.com/tolstiachok123/Final_project_TMS.git
 
 Если Вы хотите авторизоваться с ролью ADMIN - перезапустите приложение, создайте POST-запрос по адресу "localhost:8085/login", но сейчас в столбце VALUE введите значения "Roman" и "123". Нажмите кнопку Send. Поздравляю, Вы авторизованы как USER и ADMIN.
 
-Воспользуйтесь функционалом для ADMIN и измените значения алкогольного напитка следующим образом. Создайте вкладку с PUT-запросом по адресу "localhost:8085/drinks/2", выберите Body -> raw -> JSON и заполните все пары своими данными:
+Воспользуйтесь функционалом для ADMIN и измените значения алкогольного напитка следующим образом. Создайте вкладку с POST-запросом по адресу "localhost:8085/drinks/2", выберите Body -> raw -> JSON и заполните все пары своими данными:
 {
     "photoPath":"...",
     "type":"BITTER",

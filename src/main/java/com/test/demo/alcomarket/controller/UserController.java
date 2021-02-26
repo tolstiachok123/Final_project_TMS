@@ -42,7 +42,7 @@ public class UserController {
         return userService.getOne(((CustomPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
 
-    @PostMapping(value = "/registration")
+    @PutMapping(value = "/registration")
     public void registerUser(@RequestBody UserDto userDto) {
         userService.add(userMapper.dtoToObject(userDto));
     }

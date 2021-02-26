@@ -8,7 +8,10 @@ import com.test.demo.alcomarket.model.AlcoholDrink;
 import com.test.demo.alcomarket.model.Order;
 import com.test.demo.alcomarket.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +48,7 @@ public class OrderController {
         return orderDto;
     }
 
-    @PostMapping(value = "/order/current/pay")
+    @GetMapping(value = "/order/current/pay")
     public void payForOrder() {
         orderService.payCurrentOrder();
     }
