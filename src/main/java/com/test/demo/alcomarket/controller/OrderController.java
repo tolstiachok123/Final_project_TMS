@@ -1,8 +1,6 @@
 package com.test.demo.alcomarket.controller;
 
 import com.test.demo.alcomarket.dto.OrderDto;
-import com.test.demo.alcomarket.mapper.AlcoholDrinkMapper;
-import com.test.demo.alcomarket.mapper.OrderMapper;
 import com.test.demo.alcomarket.model.Order;
 import com.test.demo.alcomarket.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ public class OrderController {
     private final IOrderService orderService;
 
     @Autowired
-    OrderController(IOrderService orderService, OrderMapper orderMapper, AlcoholDrinkMapper alcoholDrinkMapper) {
+    OrderController(IOrderService orderService) {
         this.orderService = orderService;
     }
 
