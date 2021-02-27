@@ -24,8 +24,8 @@ public class UserServiceImpl implements IUserService {
 
     private final IUserRepository iUserRepository;
     private final PasswordEncoder passwordEncoder;
-    private IRoleService iRoleService;
-    private final UserMapper userMapper;
+  private final IRoleService iRoleService;
+  private final UserMapper userMapper;
 
     @Autowired
     UserServiceImpl(IUserRepository IUserRepository, UserMapper userMapper, IRoleService iRoleService, PasswordEncoder passwordEncoder) {

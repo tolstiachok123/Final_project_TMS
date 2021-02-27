@@ -69,8 +69,8 @@ public class AlcoholDrinkServiceImpl implements IAlcoholDrinkService {
         Order order = orderService.getCurrentOrCreateOrder();
         AlcoholDrink alcoholDrink = IAlcoholDrinkRepository.getOne(alcoholId);
         alcoholDrink.getOrders().add(order);
-//        order.getAlcoholDrinks().add(alcoholDrink);
-        orderService.update(order);
+      order.getAlcoholDrinks().add(alcoholDrink);
+      orderService.update(order);
     }
 
 }

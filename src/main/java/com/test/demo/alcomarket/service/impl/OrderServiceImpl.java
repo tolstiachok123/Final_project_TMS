@@ -1,7 +1,11 @@
 package com.test.demo.alcomarket.service.impl;
 
+import com.test.demo.alcomarket.dto.AlcoholDrinkDto;
+import com.test.demo.alcomarket.dto.OrderDto;
+import com.test.demo.alcomarket.mapper.AlcoholDrinkMapper;
 import com.test.demo.alcomarket.mapper.OrderMapper;
 import com.test.demo.alcomarket.mapper.UserMapper;
+import com.test.demo.alcomarket.model.AlcoholDrink;
 import com.test.demo.alcomarket.model.Order;
 import com.test.demo.alcomarket.model.User;
 import com.test.demo.alcomarket.repository.IOrderRepository;
@@ -9,26 +13,31 @@ import com.test.demo.alcomarket.service.IOrderService;
 import com.test.demo.alcomarket.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
+@Transactional
 public class OrderServiceImpl implements IOrderService {
 
     private final IOrderRepository orderRepository;
     private OrderMapper orderMapper;
     private final IUserService userService;
     private UserMapper userMapper;
-    private EntityManager entityManager;
+    private final AlcoholDrinkMapper alcoholDrinkMapper;
+    private final EntityManager entityManager;
 
     @Autowired
-    OrderServiceImpl(IOrderRepository orderRepository, IUserService userService, OrderMapper orderMapper, UserMapper userMapper, EntityManager entityManager) {
+    OrderServiceImpl(IOrderRepository orderRepository, IUserService userService, OrderMapper orderMapper, UserMapper userMapper, EntityManager entityManager, AlcoholDrinkMapper alcoholDrinkMapper) {
         this.orderRepository = orderRepository;
         this.userService = userService;
         this.orderMapper = orderMapper;
         this.userMapper = userMapper;
         this.entityManager = entityManager;
+        this.alcoholDrinkMapper = alcoholDrinkMapper;
     }
 
     @Override
@@ -55,6 +64,17 @@ public class OrderServiceImpl implements IOrderService {
             orderRepository.save(order);
             return order;
         }
+    }
+
+    @Override
+    public OrderDto getOrderDto(Order order) {
+        OrderDto orderDto = orderMapper.objectToDto(order);
+        List<AlcoholDrinkDto> drinkDtos = new ArrayList<>();
+        for (AlcoholDrink alcoholDrink : order.getAlcoholDrinks()) {
+            drinkDtos.add(alcoholDrinkMapper.objectToDto(alcoholDrink));
+        }
+        orderDto.setDrinks(drinkDtos);
+        return orderDto;
     }
 
     @Override
